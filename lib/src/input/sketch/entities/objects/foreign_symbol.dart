@@ -12,10 +12,10 @@ class ForeignSymbol {
   static final String CLASS_NAME = 'MSImmutableForeignSymbol';
   final dynamic UUID;
   final dynamic libraryID;
-  final String sourceLibraryName;
-  final bool symbolPrivate;
-  final SymbolMaster originalMaster;
-  final SymbolMaster symbolMaster;
+  final String? sourceLibraryName;
+  final bool? symbolPrivate;
+  final SymbolMaster? originalMaster;
+  final SymbolMaster? symbolMaster;
 
   ForeignSymbol(
       {this.UUID,

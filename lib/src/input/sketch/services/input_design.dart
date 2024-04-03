@@ -16,7 +16,7 @@ class InputDesignService {
   String get filename => basename(File(pathToFile).path);
   List<SketchPage> sketchPages = [];
 
-  Archive _archive;
+  Archive? _archive;
 
   InputDesignService(this.pathToFile) {
     _archive = _unzip(File(pathToFile));
@@ -25,16 +25,16 @@ class InputDesignService {
   }
 
   ///The archive of the unzipped sketch project
-  Archive get archive => _archive;
+  Archive? get archive => _archive;
 
   ///The json-decoded meta.json file inside the sketch project
-  Map get metaFileJson {
-    final metaFile = archive.findFile('meta.json').content;
+  Map? get metaFileJson {
+    final metaFile = archive!.findFile('meta.json')!.content;
     return json.decode(utf8.decode(metaFile));
   }
 
-  Map get documentFile {
-    final doc_page = archive.findFile('document.json').content;
+  Map? get documentFile {
+    final doc_page = archive!.findFile('document.json')!.content;
     assert(doc_page != null, "Document page from Sketch doesn't exist.");
     final doc_map = json.decode(utf8.decode(doc_page));
     return doc_map;
@@ -43,9 +43,9 @@ class InputDesignService {
   ///Getting the images in the sketch file and adding them to the png folder.
   void setImageDir() {
     ///Creating the pngs folder, if it's already not there.
-    var pngsPath = p.join(MainInfo().pngPath);
+    var pngsPath = p.join(MainInfo().pngPath!);
     Directory(pngsPath).createSync(recursive: true);
-    for (final file in archive) {
+    for (final file in archive!) {
       final fileName = file.name;
       if (file.isFile && fileName.contains(IMAGE_DIR_NAME)) {
         final data = file.content as List<int>;

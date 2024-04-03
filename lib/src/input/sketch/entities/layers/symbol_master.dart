@@ -21,60 +21,60 @@ part 'symbol_master.g.dart';
 @JsonSerializable()
 class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
   @override
-  String CLASS_NAME = 'symbolMaster';
-  final Color backgroundColor;
-  final bool hasBackgroundColor;
+  String? CLASS_NAME = 'symbolMaster';
+  final Color? backgroundColor;
+  final bool? hasBackgroundColor;
   final dynamic horizontalRulerData;
-  final bool includeBackgroundColorInExport;
-  final bool includeInCloudUpload;
-  final bool isFlowHome;
-  final bool resizesContent;
+  final bool? includeBackgroundColorInExport;
+  final bool? includeInCloudUpload;
+  final bool? isFlowHome;
+  final bool? resizesContent;
   final dynamic verticalRulerData;
-  final bool includeBackgroundColorInInstance;
-  String symbolID;
-  final int changeIdentifier;
-  final bool allowsOverrides;
-  final List<OverridableProperty> overrideProperties;
+  final bool? includeBackgroundColorInInstance;
+  String? symbolID;
+  final int? changeIdentifier;
+  final bool? allowsOverrides;
+  final List<OverridableProperty>? overrideProperties;
   final dynamic presetDictionary;
   @override
   @JsonKey(name: 'frame')
-  var boundaryRectangle;
+  SketchRect? boundaryRectangle;
 
   @override
   @JsonKey(name: 'do_objectID')
-  String UUID;
+  String? UUID;
 
   @override
   @JsonKey(name: '_class')
-  String type;
+  String? type;
 
-  bool _isVisible;
+  bool? _isVisible;
 
-  Style _style;
+  Style? _style;
 
-  set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  set isVisible(bool? _isVisible) => this._isVisible = _isVisible;
 
   @override
-  bool get isVisible => _isVisible;
+  bool? get isVisible => _isVisible;
 
   set style(_style) => this._style = _style;
 
   @override
-  Style get style => _style;
+  Style? get style => _style;
 
   @override
   @JsonKey(name: 'layers')
-  List<SketchNode> children;
+  List<SketchNode>? children;
 
   SymbolMaster(
-      {bool hasClickThrough,
+      {bool? hasClickThrough,
       groupLayout,
       this.children,
       this.UUID,
       booleanOperation,
       exportOptions,
-      SketchRect this.boundaryRectangle,
-      Flow flow,
+      SketchRect? this.boundaryRectangle,
+      Flow? flow,
       isFixedToViewport,
       isFlippedHorizontal,
       isFlippedVertical,
@@ -91,7 +91,7 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       hasClippingMask,
       clippingMaskMode,
       userInfo,
-      Style style,
+      Style? style,
       maintainScrollPosition,
       this.backgroundColor,
       this.hasBackgroundColor,
@@ -142,7 +142,7 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
     }
   }
 
-  List parameters;
+  List? parameters;
 
   @override
   SketchNode createSketchNode(Map<String, dynamic> json) =>
@@ -176,9 +176,9 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   Future<PBDLNode> interpretNode() async {
     var overrideProps =
-        await Future.wait(overrideProperties.map((element) async {
+        await Future.wait(overrideProperties!.map((element) async {
       // Extract UUID and type from override name
-      var uuidTypeMap = SymbolNodeMixin.extractParameter(element.overrideName);
+      var uuidTypeMap = SymbolNodeMixin.extractParameter(element.overrideName!);
       // Get the OverrideType of the element
       var ovrType = SketchOverrideTypeFactory.getType(element);
 
@@ -188,21 +188,22 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       if (ovrType != null && overrideChild != null) {
         return PBDLOverrideProperty(
           uuidTypeMap['uuid'],
-          overrideChild.name,
+          overrideChild.name!,
           ovrType.getPBDLType(), // Map SketchOverrideType to PBDLOverrideType
           await ovrType
               .getProperty(overrideChild), // Get default value from child
         );
       }
+      return null;
     }));
     overrideProps.removeWhere((element) => element == null);
-
+     
     return Future.value(PBDLSharedMasterNode(
       UUID: UUID,
       allowsOverrides: allowsOverrides,
-      overrideProperties: overrideProps,
+      overrideProperties: overrideProps as  List<PBDLOverrideProperty>,
       booleanOperation: booleanOperation,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: boundaryRectangle!.interpretFrame(),
       changeIdentifier: changeIdentifier,
       clippingMaskMode: clippingMaskMode,
       exportOptions: exportOptions,
@@ -221,7 +222,7 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       sharedStyleID: sharedStyleID,
       symbolID: symbolID,
       userInfo: userInfo,
-      style: style.interpretStyle(),
+      style: style!.interpretStyle(),
       shouldBreakMaskChain: shouldBreakMaskChain,
       rotation: rotation,
       resizingType: resizingType,
@@ -237,13 +238,13 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       isFixedToViewport: isFixedToViewport,
       parameters: parameters,
       children: await Future.wait(
-          children.map((e) async => await e.interpretNode()).toList()),
+          children!.map((e) async => await e.interpretNode()).toList()),
     ));
   }
 
   /// Searches `children` for a [SketchNode] with given `UUID`
-  SketchNode _traverseChildrenForOverride(String UUID) {
-    var stack = List.from(children);
+  SketchNode? _traverseChildrenForOverride(String? UUID) {
+    var stack = List.from(children!);
 
     while (stack.isNotEmpty) {
       var current = stack.removeLast();
@@ -253,7 +254,7 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       }
 
       if (current is AbstractGroupLayer) {
-        current.children.forEach(stack.add);
+        current.children!.forEach(stack.add);
       }
     }
     return null;

@@ -22,22 +22,22 @@ import 'sketch_screen.dart';
 
 class SketchProject {
   var log = Logger('SketchNodeTree');
-  SketchPage rootScreen;
+  SketchPage? rootScreen;
 
-  String projectName;
+  String? projectName;
   bool debug = false;
 
-  String id;
+  String? id;
 
   List<SketchPage> pages = [];
-  List<SketchPage> miscPages = [];
-  List<SharedStyle> sharedStyles = [];
+  List<SketchPage?> miscPages = [];
+  List<SharedStyle>? sharedStyles = [];
 
   final InputDesignService _ids;
-  Archive _originalArchive;
+  Archive? _originalArchive;
   final Map _pagesAndArtboards;
   SketchProject(this._ids, this._pagesAndArtboards, this.projectName) {
-    id = _ids.documentFile['do_objectID'];
+    id = _ids.documentFile!['do_objectID'];
     _originalArchive = _ids.archive;
     miscPages.add(_setThirdPartySymbols());
     sharedStyles = _setSharedStyles();
@@ -47,11 +47,11 @@ class SketchProject {
     }
   }
 
-  List<SharedStyle> _setSharedStyles() {
+  List<SharedStyle>? _setSharedStyles() {
     try {
       var sharedStyles = <SharedStyle>[];
-      var jsonData = _ids.documentFile;
-      var doc = Document.fromJson(jsonData);
+      var jsonData = _ids.documentFile!;
+      var doc = Document.fromJson(jsonData as Map<String, dynamic>);
       if (doc.layerStyles != null) {
         var LayerStyles = doc.layerStyles['objects'] ?? [];
         for (var sharedStyle in LayerStyles) {
@@ -79,10 +79,10 @@ class SketchProject {
     }
   }
 
-  SketchPage _setThirdPartySymbols() {
+  SketchPage? _setThirdPartySymbols() {
     try {
-      var jsonData = _ids.documentFile;
-      var doc = Document.fromJson(jsonData);
+      var jsonData = _ids.documentFile!;
+      var doc = Document.fromJson(jsonData as Map<String, dynamic>);
       var foreignLayers = doc.foreignSymbols ?? <ForeignSymbol>[];
       var pg =
           SketchPage(name: 'third_party_widgets', id: jsonData['do_objectID']);
@@ -91,7 +91,7 @@ class SketchProject {
           designNode: layer.originalMaster,
           id: layer.UUID,
           name: '',
-          type: layer.originalMaster.type,
+          type: layer.originalMaster!.type,
         ));
       }
       return pg;
@@ -105,7 +105,7 @@ class SketchProject {
     var sketchPages = <SketchPage>[];
     for (var entry in pagesAndArtboards.entries) {
       var pageContent =
-          _originalArchive.findFile('pages/${entry.key}.json').content;
+          _originalArchive!.findFile('pages/${entry.key}.json')!.content;
       var jsonData = json.decode(utf8.decode(pageContent));
 
       var pg = SketchPage(
@@ -114,7 +114,7 @@ class SketchProject {
       var node = Page.fromJson(jsonData); // Actual Sketch Node
 
       // Turn layers into PBNodes
-      for (var layer in node.children) {
+      for (var layer in node.children!) {
         pg.addScreen(SketchScreen(
           designNode: layer,
           id: layer.UUID,

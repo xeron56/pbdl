@@ -11,11 +11,11 @@ part 'text_style_global.g.dart';
 @JsonSerializable(explicitToJson: true)
 class TextStyleGlobal extends GlobalStyleProperty {
   TextStyleGlobal(
-    String UUID,
-    String styleType, {
-    String name,
-    String description,
-    FigmaTextStyle styleNode,
+    String? UUID,
+    String? styleType, {
+    String? name,
+    String? description,
+    FigmaTextStyle? styleNode,
   }) : super(
           UUID,
           styleType,
@@ -27,7 +27,7 @@ class TextStyleGlobal extends GlobalStyleProperty {
   /// Contains the actual text style value.
 
   @override
-  Future<PBDLNode> interpretNode() async {
+  Future<PBDLNode?> interpretNode() async {
     if (styleNode == null) {
       return null;
     }
@@ -44,9 +44,9 @@ class TextStyleGlobal extends GlobalStyleProperty {
   factory TextStyleGlobal.fromJson(
       Map<String, dynamic> json, FigmaBaseNode styleNode) {
     if (styleNode is! FigmaText) {
-      return null;
+      throw UnimplementedError('This is not a text node');
     }
-    final textStyle = (styleNode as FigmaText).style;
+    final textStyle = styleNode.style;
     final figmaNode = _$TextStyleGlobalFromJson(json)..styleNode = textStyle;
 
     return figmaNode;

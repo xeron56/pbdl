@@ -7,24 +7,24 @@ class MainInfo {
   static final MainInfo _singleton = MainInfo._internal();
 
   /// Path representing where the output of pbdl will be produced
-  String outputPath;
+  late String outputPath;
 
   /// Current working directory; contains the path from where the script was called
-  Directory cwd;
+  late Directory cwd;
 
   /// APIkey needed to do API calls
-  FigmaKey figmaKey;
+  FigmaKey? figmaKey;
 
   /// Project ID on Figma
-  String figmaProjectID;
+  String? figmaProjectID;
 
-  String sketchPath;
+  String? sketchPath;
 
-  String projectName;
+  String? projectName;
 
-  String pngPath;
+  String? pngPath;
 
-  IntegrationStrategy integrationStrategy;
+  late IntegrationStrategy integrationStrategy;
 
   factory MainInfo() {
     return _singleton;

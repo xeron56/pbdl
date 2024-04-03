@@ -6,9 +6,9 @@ part 'flow.g.dart';
 @JsonSerializable()
 class Flow {
   @JsonKey(name: '_class')
-  final String classField;
-  String destinationArtboardID;
-  bool maintainScrollPosition;
+  final String? classField;
+  String? destinationArtboardID;
+  bool? maintainScrollPosition;
   dynamic animationType;
   Flow({
     this.classField,

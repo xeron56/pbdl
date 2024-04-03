@@ -6,48 +6,46 @@ part of 'sketch_text.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SketchText _$SketchTextFromJson(Map<String, dynamic> json) {
-  return SketchText(
-    UUID: json['do_objectID'] as String,
-    booleanOperation: json['booleanOperation'],
-    exportOptions: json['exportOptions'],
-    boundaryRectangle: json['frame'] == null
-        ? null
-        : SketchRect.fromJson(json['frame'] as Map<String, dynamic>),
-    flow: json['flow'] == null
-        ? null
-        : Flow.fromJson(json['flow'] as Map<String, dynamic>),
-    isFixedToViewport: json['isFixedToViewport'] as bool,
-    isFlippedHorizontal: json['isFlippedHorizontal'] as bool,
-    isFlippedVertical: json['isFlippedVertical'] as bool,
-    isLocked: json['isLocked'] as bool,
-    isVisible: json['isVisible'] as bool,
-    layerListExpandedType: json['layerListExpandedType'],
-    name: json['name'] as String,
-    nameIsFixed: json['nameIsFixed'] as bool,
-    resizingConstraint: json['resizingConstraint'],
-    resizingType: json['resizingType'],
-    rotation: (json['rotation'] as num)?.toDouble(),
-    sharedStyleID: json['sharedStyleID'],
-    shouldBreakMaskChain: json['shouldBreakMaskChain'] as bool,
-    hasClippingMask: json['hasClippingMask'] as bool,
-    clippingMaskMode: json['clippingMaskMode'] as int,
-    userInfo: json['userInfo'],
-    style: json['style'] == null
-        ? null
-        : Style.fromJson(json['style'] as Map<String, dynamic>),
-    maintainScrollPosition: json['maintainScrollPosition'] as bool,
-    attributedString: json['attributedString'],
-    automaticallyDrawOnUnderlyingPath:
-        json['automaticallyDrawOnUnderlyingPath'] as bool,
-    dontSynchroniseWithSymbol: json['dontSynchroniseWithSymbol'] as bool,
-    lineSpacingBehaviour: json['lineSpacingBehaviour'],
-    textBehaviour: json['textBehaviour'],
-    glyphBounds: json['glyphBounds'],
-  )
-    ..CLASS_NAME = json['CLASS_NAME'] as String
-    ..type = json['_class'] as String;
-}
+SketchText _$SketchTextFromJson(Map<String, dynamic> json) => SketchText(
+      UUID: json['do_objectID'] as String?,
+      booleanOperation: json['booleanOperation'],
+      exportOptions: json['exportOptions'],
+      boundaryRectangle: json['frame'] == null
+          ? null
+          : SketchRect.fromJson(json['frame'] as Map<String, dynamic>),
+      flow: json['flow'] == null
+          ? null
+          : Flow.fromJson(json['flow'] as Map<String, dynamic>),
+      isFixedToViewport: json['isFixedToViewport'] as bool?,
+      isFlippedHorizontal: json['isFlippedHorizontal'] as bool?,
+      isFlippedVertical: json['isFlippedVertical'] as bool?,
+      isLocked: json['isLocked'] as bool?,
+      isVisible: json['isVisible'] as bool?,
+      layerListExpandedType: json['layerListExpandedType'],
+      name: json['name'] as String?,
+      nameIsFixed: json['nameIsFixed'] as bool?,
+      resizingConstraint: json['resizingConstraint'],
+      resizingType: json['resizingType'],
+      rotation: (json['rotation'] as num?)?.toDouble(),
+      sharedStyleID: json['sharedStyleID'],
+      shouldBreakMaskChain: json['shouldBreakMaskChain'] as bool?,
+      hasClippingMask: json['hasClippingMask'] as bool?,
+      clippingMaskMode: json['clippingMaskMode'] as int?,
+      userInfo: json['userInfo'],
+      style: json['style'] == null
+          ? null
+          : Style.fromJson(json['style'] as Map<String, dynamic>),
+      maintainScrollPosition: json['maintainScrollPosition'] as bool?,
+      attributedString: json['attributedString'],
+      automaticallyDrawOnUnderlyingPath:
+          json['automaticallyDrawOnUnderlyingPath'] as bool?,
+      dontSynchroniseWithSymbol: json['dontSynchroniseWithSymbol'] as bool?,
+      lineSpacingBehaviour: json['lineSpacingBehaviour'],
+      textBehaviour: json['textBehaviour'],
+      glyphBounds: json['glyphBounds'],
+    )
+      ..CLASS_NAME = json['CLASS_NAME'] as String?
+      ..type = json['_class'] as String?;
 
 Map<String, dynamic> _$SketchTextToJson(SketchText instance) =>
     <String, dynamic>{

@@ -20,48 +20,48 @@ class Rectangle extends AbstractShapeLayer
     with PBColorMixin
     implements SketchNodeFactory {
   @override
-  String CLASS_NAME = 'rectangle';
-  final double fixedRadius;
-  final bool hasConvertedToNewRoundCorners;
-  final bool needsConvertionToNewRoundCorners;
+  String? CLASS_NAME = 'rectangle';
+  final double? fixedRadius;
+  final bool? hasConvertedToNewRoundCorners;
+  final bool? needsConvertionToNewRoundCorners;
   @JsonKey(name: 'frame')
   @override
-  var boundaryRectangle;
+  SketchRect? boundaryRectangle;
   @override
   @JsonKey(name: 'do_objectID')
-  String UUID;
+  String? UUID;
 
   @override
   @JsonKey(name: '_class')
-  String type;
+  String? type;
 
-  bool _isVisible;
+  bool? _isVisible;
 
-  Style _style;
+  Style? _style;
 
-  set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  set isVisible(bool? _isVisible) => this._isVisible = _isVisible;
 
   @override
-  bool get isVisible => _isVisible;
+  bool? get isVisible => _isVisible;
 
   set style(_style) => this._style = _style;
 
   @override
-  Style get style => _style;
+  Style? get style => _style;
 
   Rectangle({
     this.fixedRadius,
     this.hasConvertedToNewRoundCorners,
     this.needsConvertionToNewRoundCorners,
-    bool edited,
-    bool isClosed,
+    bool? edited,
+    bool? isClosed,
     pointRadiusBehaviour,
-    List points,
+    List? points,
     this.UUID,
     booleanOperation,
     exportOptions,
-    SketchRect this.boundaryRectangle,
-    Flow flow,
+    SketchRect? this.boundaryRectangle,
+    Flow? flow,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
@@ -78,7 +78,7 @@ class Rectangle extends AbstractShapeLayer
     hasClippingMask,
     clippingMaskMode,
     userInfo,
-    Style style,
+    Style? style,
     maintainScrollPosition,
   })  : _isVisible = isVisible,
         _style = style,
@@ -130,7 +130,7 @@ class Rectangle extends AbstractShapeLayer
         UUID: UUID,
         booleanOperation: booleanOperation,
         exportOptions: exportOptions,
-        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        boundaryRectangle: boundaryRectangle!.interpretFrame(),
         isFixedToViewport: isFixedToViewport,
         isFlippedHorizontal: isFlippedHorizontal,
         isFlippedVertical: isFlippedVertical,
@@ -148,7 +148,7 @@ class Rectangle extends AbstractShapeLayer
         clippingMaskMode: clippingMaskMode,
         userInfo: userInfo,
         maintainScrollPosition: maintainScrollPosition,
-        style: style.interpretStyle(),
+        style: style!.interpretStyle(),
         prototypeNodeUUID: flow?.destinationArtboardID));
   }
 }

@@ -6,16 +6,15 @@ part of 'color_controls.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ColorControls _$ColorControlsFromJson(Map<String, dynamic> json) {
-  return ColorControls(
-    brightness: (json['brightness'] as num)?.toDouble(),
-    classField: json['_class'] as String,
-    contrast: (json['contrast'] as num)?.toDouble(),
-    hue: (json['hue'] as num)?.toDouble(),
-    isEnabled: json['isEnabled'] as bool,
-    saturation: (json['saturation'] as num)?.toDouble(),
-  );
-}
+ColorControls _$ColorControlsFromJson(Map<String, dynamic> json) =>
+    ColorControls(
+      brightness: (json['brightness'] as num?)?.toDouble(),
+      classField: json['_class'] as String?,
+      contrast: (json['contrast'] as num?)?.toDouble(),
+      hue: (json['hue'] as num?)?.toDouble(),
+      isEnabled: json['isEnabled'] as bool?,
+      saturation: (json['saturation'] as num?)?.toDouble(),
+    );
 
 Map<String, dynamic> _$ColorControlsToJson(ColorControls instance) =>
     <String, dynamic>{

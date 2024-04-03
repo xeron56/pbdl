@@ -9,18 +9,18 @@ part 'border.g.dart';
 @JsonSerializable()
 class Border {
   @JsonKey(name: '_class')
-  final String classField;
+  final String? classField;
 
-  final bool isEnabled;
+  final bool? isEnabled;
 
-  final double fillType;
+  final double? fillType;
 
-  final Color color;
-  final ContextSettings contextSettings;
-  final Gradient gradient;
-  final double position;
+  final Color? color;
+  final ContextSettings? contextSettings;
+  final Gradient? gradient;
+  final double? position;
 
-  final double thickness;
+  final double? thickness;
 
   Border(
       {this.classField,
@@ -32,7 +32,7 @@ class Border {
       this.position,
       this.thickness});
 
-  factory Border.fromJson(Map json) => _$BorderFromJson(json);
+  factory Border.fromJson(Map json) => _$BorderFromJson(json as Map<String, dynamic>);
   Map toJson() => _$BorderToJson(this);
 
   PBDLBorder interpretBorder() {

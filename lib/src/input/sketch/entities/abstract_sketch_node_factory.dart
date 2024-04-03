@@ -40,7 +40,7 @@ class AbstractSketchNodeFactory {
 
   AbstractSketchNodeFactory();
 
-  static SketchNode getSketchNode(Map<String, dynamic> json) {
+  static SketchNode? getSketchNode(Map<String, dynamic> json) {
     var _cleansingService = PositionalCleansingService();
     var className = json[SKETCH_CLASS_KEY];
     if (className != null) {
@@ -66,6 +66,6 @@ class AbstractSketchNodeFactory {
 ///constructor creates less of an overhead (according to online docs). Regular
 ///method is just going to call the factory method.
 abstract class SketchNodeFactory {
-  String CLASS_NAME;
+  String? CLASS_NAME;
   dynamic createSketchNode(Map<String, dynamic> json);
 }

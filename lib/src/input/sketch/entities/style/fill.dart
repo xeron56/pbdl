@@ -10,21 +10,21 @@ part 'fill.g.dart';
 @JsonSerializable()
 class Fill {
   @JsonKey(name: '_class')
-  final String classField;
+  final String? classField;
   @override
-  bool isEnabled;
-  final int fillType;
-  Color color;
-  final ContextSettings contextSettings;
-  final Gradient gradient;
-  final int noiseIndex;
-  final int noiseIntensity;
-  final int patternFillType;
-  final int patternTileScale;
+  bool? isEnabled;
+  final int? fillType;
+  Color? color;
+  final ContextSettings? contextSettings;
+  final Gradient? gradient;
+  final int? noiseIndex;
+  final int? noiseIntensity;
+  final int? patternFillType;
+  final int? patternTileScale;
 
   Fill(
       {this.classField,
-      Color this.color,
+      Color? this.color,
       this.contextSettings,
       this.fillType,
       this.gradient,
@@ -34,7 +34,7 @@ class Fill {
       this.patternFillType,
       this.patternTileScale});
 
-  factory Fill.fromJson(Map json) => _$FillFromJson(json);
+  factory Fill.fromJson(Map json) => _$FillFromJson(json as Map<String, dynamic>);
   Map toJson() => _$FillToJson(this);
 
   PBDLFill interpretFill() {

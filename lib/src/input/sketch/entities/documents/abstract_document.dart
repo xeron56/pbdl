@@ -6,15 +6,15 @@ abstract class AbstractDocument {
   final dynamic assets;
   final dynamic colorSpace;
   final dynamic currentPageIndex;
-  final List foreignLayerStyles;
-  final List<ForeignSymbol> foreignSymbols;
-  final List foreignTextStyles;
+  final List? foreignLayerStyles;
+  final List<ForeignSymbol>? foreignSymbols;
+  final List? foreignTextStyles;
   final dynamic layerStyles;
   final dynamic layerTextStyles;
   final dynamic layerSymbols;
-  final List embeddedFontReferences;
-  final bool autoEmbedFonts;
-  final bool agreedToFontEmbedding;
+  final List? embeddedFontReferences;
+  final bool? autoEmbedFonts;
+  final bool? agreedToFontEmbedding;
 
   AbstractDocument(
       this.UUID,

@@ -27,14 +27,14 @@ class SketchAssetProcessor extends AssetProcessingService {
   /// Converts an svg with `uuid` from a sketch file to a png with specified
   /// `width` and `height`
   @override
-  Future<Uint8List> processImage(String uuid, [num width, num height]) async {
+  Future<Uint8List?> processImage(String? uuid, [num? width, num? height]) async {
     try {
       var body = Platform.environment.containsKey('SAC_ENDPOINT')
           ? {
               'uuid': uuid,
               'width': width,
               'height': height,
-              'blob': getBlobName(MainInfo().sketchPath),
+              'blob': getBlobName(MainInfo().sketchPath!),
               'container': 'design-file'
             }
           : {
@@ -46,7 +46,7 @@ class SketchAssetProcessor extends AssetProcessingService {
 
       var response = await http
           .post(
-            Uri.parse(svg_convertion_endpoint),
+            Uri.parse(svg_convertion_endpoint!),
             headers: {HttpHeaders.contentTypeHeader: 'application/json'},
             body: jsonEncode(body),
           )
@@ -72,27 +72,33 @@ class SketchAssetProcessor extends AssetProcessingService {
     for (var entry in uuids.entries) {
       var image = await processImage(
           entry.key, uuids[entry.key]['width'], uuids[entry.key]['height']);
-      await super.uploadToStorage(image, entry.key);
+      await super.uploadToStorage(image!, entry.key);
     }
   }
 
-  static Map<String, int> imageNames = {};
+  static Map<String?, int> imageNames = {};
 
-  static String _getImageName(String name) {
-    if (!imageNames.containsKey(name)) {
-      imageNames[name] = 0;
-      return name;
-    } else {
-      var imageNumber = ++imageNames[name];
-      return name + '_$imageNumber';
-    }
+  
+
+  static String? _getImageName(String? name) {
+  if (name == null) return null; // Return null early if name is null.
+
+  if (!imageNames.containsKey(name)) {
+    imageNames[name] = 0;
+    return name; // Safe to return as is because name is checked for null.
+  } else {
+    var imageNumber = imageNames[name]! + 1; // Use ! to assert non-null and increment.
+    imageNames[name] = imageNumber; // Update the map with the new number.
+    return '$name\_$imageNumber'; // Use the non-null name directly.
   }
+}
+
 
   /// Writes image `bytes` to output png path using `name` as filename.
-  static String writeImage(String name, Uint8List bytes) {
+  static String writeImage(String? name, Uint8List bytes) {
     if (!Platform.environment.containsKey('SAC_ENDPOINT')) {
       var checkedName = _getImageName(name);
-      var path = p.join(MainInfo().pngPath, '$checkedName.png');
+      var path = p.join(MainInfo().pngPath!, '$checkedName.png');
       File(path).writeAsBytesSync(bytes);
       return path;
     }

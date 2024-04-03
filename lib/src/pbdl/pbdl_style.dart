@@ -9,13 +9,13 @@ part 'pbdl_style.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLStyle extends PBDLNode {
-  List<PBDLFill> fills;
-  PBDLBorderOptions borderOptions;
-  List<PBDLEffect> effects;
+  List<PBDLFill>? fills;
+  PBDLBorderOptions? borderOptions;
+  List<PBDLEffect>? effects;
 
-  PBDLTextStyle textStyle;
+  PBDLTextStyle? textStyle;
 
-  bool clipsContent;
+  bool? clipsContent;
 
   @override
   final pbdlType = 'style';
@@ -28,9 +28,9 @@ class PBDLStyle extends PBDLNode {
     this.clipsContent,
   }) : super('', '', true, null, null, '');
 
-  static PBDLStyle getStyle(dynamic style) {
+  static PBDLStyle? getStyle(dynamic style) {
     if (style is Map) {
-      return PBDLStyle.fromJson(style);
+      return PBDLStyle.fromJson(style as Map<String, dynamic>);
     }
     return (style as FigmaStyleProperty)?.interpretStyle();
   }

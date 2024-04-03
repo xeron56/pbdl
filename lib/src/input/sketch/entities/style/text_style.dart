@@ -13,13 +13,13 @@ class TextStyle {
   Map<String, dynamic> rawEncodedAttributes;
   @override
   @JsonKey(ignore: true)
-  FontDescriptor fontDescriptor;
+  late FontDescriptor fontDescriptor;
   @JsonKey(ignore: true)
-  ParagraphStyle paragraphStyle;
+  ParagraphStyle? paragraphStyle;
   @JsonKey(ignore: true)
-  num verticalAlignment;
+  num? verticalAlignment;
   @JsonKey(ignore: true)
-  String style;
+  String? style;
 
   /// List of possible text weights, sorted by longest string first for .contains
   final List<String> STYLES = [
@@ -67,7 +67,7 @@ class TextStyle {
     'BlackItalic': {'fontWeight': 'w900', 'fontStyle': 'italic'},
   };
 
-  TextStyle({this.rawEncodedAttributes}) {
+  TextStyle({required this.rawEncodedAttributes}) {
     fontColor = Color.fromJson(
         rawEncodedAttributes['MSAttributedStringColorAttribute']);
     fontDescriptor = FontDescriptor.fromJson(
@@ -78,15 +78,15 @@ class TextStyle {
 
     //Find if text has special weight
     for (var s in STYLES) {
-      if (fontDescriptor.fontName.contains(s)) {
+      if (fontDescriptor.fontName!.contains(s)) {
         // this is really a mapping of style to weight
         (fontDescriptor as FontDescriptor).fontWeight =
-            fontInfo[s]['fontWeight'];
+            fontInfo[s]!['fontWeight'];
         // this is only normal, italic style
-        (fontDescriptor as FontDescriptor).fontStyle = fontInfo[s]['fontStyle'];
+        (fontDescriptor as FontDescriptor).fontStyle = fontInfo[s]!['fontStyle'];
         // this is really fontFamily with removal of -XXX font type name suffix
         (fontDescriptor as FontDescriptor).fontName =
-            fontDescriptor.fontName.replaceFirst('-$s', '');
+            fontDescriptor.fontName!.replaceFirst('-$s', '');
         (fontDescriptor as FontDescriptor).letterSpacing =
             rawEncodedAttributes['kerning'] ?? 0.0;
         break;
@@ -108,11 +108,11 @@ class TextStyle {
   }
 
   @JsonKey(ignore: true)
-  Color fontColor;
+  Color? fontColor;
 
-  String fontFamily;
+  String? fontFamily;
 
-  String fontSize;
+  String? fontSize;
 
-  String fontWeight;
+  String? fontWeight;
 }

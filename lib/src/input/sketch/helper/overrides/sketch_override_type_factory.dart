@@ -18,8 +18,8 @@ class SketchOverrideTypeFactory {
   ];
 
   /// Returns an [OverrideType] from an [OverridableValue].
-  static SketchOverrideType getType(SketchOverride node) {
-    var uuidTypeMap = SymbolNodeMixin.extractParameter(node.overrideName);
+  static SketchOverrideType? getType(SketchOverride node) {
+    var uuidTypeMap = SymbolNodeMixin.extractParameter(node.overrideName!);
     var type = uuidTypeMap['type'];
     for (var ovrType in _overrideTypes) {
       if (ovrType.TYPE_NAME == type) {

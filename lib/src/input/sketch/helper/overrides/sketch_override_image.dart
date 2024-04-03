@@ -18,6 +18,6 @@ class SketchOverrideImage extends SketchOverrideType {
   String getPBDLType() => PBDLOverrideImage.PBDL_TYPE_NAME;
 
   @override
-  String getValue(OverridableValue overrideValue) =>
+  String? getValue(OverridableValue overrideValue) =>
       overrideValue.value['_ref'];
 }

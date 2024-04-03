@@ -10,9 +10,9 @@ part 'pbdl_override_value.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLOverrideValue extends PBDLNode implements PBDLNodeFactory {
   /// value of the override
-  PBDLNode value;
+  PBDLNode? value;
 
-  String valueName;
+  String? valueName;
 
   @override
   final pbdlType = 'pbdl_override_value';
@@ -21,8 +21,8 @@ class PBDLOverrideValue extends PBDLNode implements PBDLNodeFactory {
   final ovrType;
 
   PBDLOverrideValue(
-    String UUID,
-    String name,
+    String? UUID,
+    String? name,
     this.ovrType,
     this.value,
     this.valueName,

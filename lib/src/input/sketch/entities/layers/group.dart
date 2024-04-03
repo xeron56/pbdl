@@ -13,51 +13,51 @@ part 'group.g.dart';
 @JsonSerializable()
 class Group extends AbstractGroupLayer implements SketchNodeFactory {
   @override
-  String CLASS_NAME = 'group';
+  String? CLASS_NAME = 'group';
   @override
   @JsonKey(name: 'frame')
-  var boundaryRectangle;
+  SketchRect? boundaryRectangle;
   @override
   @JsonKey(name: 'do_objectID')
-  String UUID;
+  String? UUID;
 
   @override
   @JsonKey(name: '_ref')
-  String imageReference;
+  String? imageReference;
 
   @override
   @JsonKey(name: '_class')
-  String type;
+  String? type;
 
-  bool _isVisible;
+  bool? _isVisible;
 
-  Style _style;
-
-  @override
-  void set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  Style? _style;
 
   @override
-  bool get isVisible => _isVisible;
+  void set isVisible(bool? _isVisible) => this._isVisible = _isVisible;
+
+  @override
+  bool? get isVisible => _isVisible;
 
   @override
   void set style(_style) => this._style = _style;
 
   @override
-  Style get style => _style;
+  Style? get style => _style;
 
   @override
   @JsonKey(name: 'layers')
-  List<SketchNode> children;
+  List<SketchNode>? children;
 
   Group(
-      {bool hasClickThrough,
+      {bool? hasClickThrough,
       groupLayout,
-      List<SketchNode> this.children,
+      List<SketchNode>? this.children,
       this.UUID,
       booleanOperation,
       exportOptions,
-      SketchRect this.boundaryRectangle,
-      Flow flow,
+      SketchRect? this.boundaryRectangle,
+      Flow? flow,
       isFixedToViewport,
       isFlippedHorizontal,
       isFlippedVertical,
@@ -74,7 +74,7 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
       hasClippingMask,
       clippingMaskMode,
       userInfo,
-      Style style,
+      Style? style,
       maintainScrollPosition})
       : _isVisible = isVisible,
         _style = style,
@@ -120,7 +120,7 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: boundaryRectangle!.interpretFrame(),
       isFixedToViewport: isFixedToViewport,
       isFlippedHorizontal: isFlippedHorizontal,
       isFlippedVertical: isFlippedVertical,
@@ -137,9 +137,9 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      style: style.interpretStyle(),
+      style: style!.interpretStyle(),
       children: await Future.wait(
-          children.map((e) async => await e.interpretNode()).toList()),
+          children!.map((e) async => await e.interpretNode()).toList()),
       prototypeNodeUUID: flow?.destinationArtboardID,
     ));
   }

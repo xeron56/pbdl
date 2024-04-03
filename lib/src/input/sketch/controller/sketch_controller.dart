@@ -8,13 +8,13 @@ import 'package:pbdl/src/util/main_info.dart';
 import 'package:quick_log/quick_log.dart';
 
 class SketchController {
-  var log;
+  late var log;
   SketchController() {
     log = Logger(runtimeType.toString());
   }
   DesignType get designType => DesignType.SKETCH;
 
-  String sketchPath;
+  late String sketchPath;
 
   Future<SketchProject> convertFile(String sketchPath) async {
     var sketchProject;
@@ -23,14 +23,14 @@ class SketchController {
     ///INTAKE
     var ids = InputDesignService(sketchPath);
     sketchProject ??= generateSketchNodeTree(
-        ids, ids.metaFileJson['pagesAndArtboards'], MainInfo().projectName);
+        ids, ids.metaFileJson!['pagesAndArtboards'], MainInfo().projectName);
 
     AzureAssetService().projectUUID = sketchProject.id;
 
     return sketchProject;
   }
 
-  SketchProject generateSketchNodeTree(
+  SketchProject? generateSketchNodeTree(
       InputDesignService ids, Map pagesAndArtboards, projectName) {
     try {
       return SketchProject(ids, pagesAndArtboards, projectName);

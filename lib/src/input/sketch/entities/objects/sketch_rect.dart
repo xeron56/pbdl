@@ -7,9 +7,9 @@ part 'sketch_rect.g.dart';
 @JsonSerializable()
 class SketchRect {
   @JsonKey(name: '_class')
-  final String classField;
-  final bool constrainProportions;
-  double height, width, x, y;
+  final String? classField;
+  final bool? constrainProportions;
+  double? height, width, x, y;
   SketchRect({
     this.classField,
     this.constrainProportions,

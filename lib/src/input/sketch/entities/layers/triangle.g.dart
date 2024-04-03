@@ -6,45 +6,43 @@ part of 'triangle.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Triangle _$TriangleFromJson(Map<String, dynamic> json) {
-  return Triangle(
-    edited: json['edited'] as bool,
-    isClosed: json['isClosed'] as bool,
-    pointRadiusBehaviour: json['pointRadiusBehaviour'],
-    points: json['points'] as List,
-    UUID: json['do_objectID'] as String,
-    booleanOperation: json['booleanOperation'],
-    exportOptions: json['exportOptions'],
-    boundaryRectangle: json['frame'] == null
-        ? null
-        : SketchRect.fromJson(json['frame'] as Map<String, dynamic>),
-    flow: json['flow'] == null
-        ? null
-        : Flow.fromJson(json['flow'] as Map<String, dynamic>),
-    isFixedToViewport: json['isFixedToViewport'],
-    isFlippedHorizontal: json['isFlippedHorizontal'],
-    isFlippedVertical: json['isFlippedVertical'],
-    isLocked: json['isLocked'],
-    isVisible: json['isVisible'],
-    layerListExpandedType: json['layerListExpandedType'],
-    name: json['name'],
-    nameIsFixed: json['nameIsFixed'],
-    resizingConstraint: json['resizingConstraint'],
-    resizingType: json['resizingType'],
-    rotation: json['rotation'],
-    sharedStyleID: json['sharedStyleID'],
-    shouldBreakMaskChain: json['shouldBreakMaskChain'],
-    hasClippingMask: json['hasClippingMask'],
-    clippingMaskMode: json['clippingMaskMode'],
-    userInfo: json['userInfo'],
-    style: json['style'] == null
-        ? null
-        : Style.fromJson(json['style'] as Map<String, dynamic>),
-    maintainScrollPosition: json['maintainScrollPosition'],
-  )
-    ..CLASS_NAME = json['CLASS_NAME'] as String
-    ..type = json['_class'] as String;
-}
+Triangle _$TriangleFromJson(Map<String, dynamic> json) => Triangle(
+      edited: json['edited'] as bool?,
+      isClosed: json['isClosed'] as bool?,
+      pointRadiusBehaviour: json['pointRadiusBehaviour'],
+      points: json['points'] as List<dynamic>?,
+      UUID: json['do_objectID'] as String?,
+      booleanOperation: json['booleanOperation'],
+      exportOptions: json['exportOptions'],
+      boundaryRectangle: json['frame'] == null
+          ? null
+          : SketchRect.fromJson(json['frame'] as Map<String, dynamic>),
+      flow: json['flow'] == null
+          ? null
+          : Flow.fromJson(json['flow'] as Map<String, dynamic>),
+      isFixedToViewport: json['isFixedToViewport'],
+      isFlippedHorizontal: json['isFlippedHorizontal'],
+      isFlippedVertical: json['isFlippedVertical'],
+      isLocked: json['isLocked'],
+      isVisible: json['isVisible'],
+      layerListExpandedType: json['layerListExpandedType'],
+      name: json['name'],
+      nameIsFixed: json['nameIsFixed'],
+      resizingConstraint: json['resizingConstraint'],
+      resizingType: json['resizingType'],
+      rotation: json['rotation'],
+      sharedStyleID: json['sharedStyleID'],
+      shouldBreakMaskChain: json['shouldBreakMaskChain'],
+      hasClippingMask: json['hasClippingMask'],
+      clippingMaskMode: json['clippingMaskMode'],
+      userInfo: json['userInfo'],
+      style: json['style'] == null
+          ? null
+          : Style.fromJson(json['style'] as Map<String, dynamic>),
+      maintainScrollPosition: json['maintainScrollPosition'],
+    )
+      ..CLASS_NAME = json['CLASS_NAME'] as String?
+      ..type = json['_class'] as String?;
 
 Map<String, dynamic> _$TriangleToJson(Triangle instance) => <String, dynamic>{
       'booleanOperation': instance.booleanOperation,

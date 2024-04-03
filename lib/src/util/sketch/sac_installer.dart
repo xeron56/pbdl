@@ -4,12 +4,12 @@ import 'dart:convert';
 import 'package:quick_log/quick_log.dart';
 
 class SACInstaller {
-  static Process process;
+  static late Process process;
 
   static final Logger _log = Logger('SACInstaller');
 
   /// Since pbdl may be run as a git submodule, the path may change.
-  static String pathToPBDL;
+  static late String pathToPBDL;
 
   static void _configurePathToPBDL() {
     pathToPBDL = Directory.current.path;

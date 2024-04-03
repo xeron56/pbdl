@@ -6,7 +6,7 @@ part 'paragraph_style.g.dart';
 @JsonSerializable()
 class ParagraphStyle {
   @override
-  int alignment;
+  int? alignment;
 
   ParagraphStyle({this.alignment});
 

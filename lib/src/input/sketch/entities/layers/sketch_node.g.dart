@@ -6,39 +6,37 @@ part of 'sketch_node.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SketchNode _$SketchNodeFromJson(Map<String, dynamic> json) {
-  return SketchNode(
-    json['do_objectID'] as String,
-    json['booleanOperation'],
-    json['exportOptions'],
-    json['frame'] == null
-        ? null
-        : SketchRect.fromJson(json['frame'] as Map<String, dynamic>),
-    json['flow'] == null
-        ? null
-        : Flow.fromJson(json['flow'] as Map<String, dynamic>),
-    json['isFixedToViewport'] as bool,
-    json['isFlippedHorizontal'] as bool,
-    json['isFlippedVertical'] as bool,
-    json['isLocked'] as bool,
-    json['isVisible'] as bool,
-    json['layerListExpandedType'],
-    json['name'] as String,
-    json['nameIsFixed'] as bool,
-    json['resizingConstraint'],
-    json['resizingType'],
-    json['rotation'] as num,
-    json['sharedStyleID'],
-    json['shouldBreakMaskChain'] as bool,
-    json['hasClippingMask'] as bool,
-    json['clippingMaskMode'] as int,
-    json['userInfo'],
-    json['style'] == null
-        ? null
-        : Style.fromJson(json['style'] as Map<String, dynamic>),
-    json['maintainScrollPosition'] as bool,
-  )..type = json['type'] as String;
-}
+SketchNode _$SketchNodeFromJson(Map<String, dynamic> json) => SketchNode(
+      json['do_objectID'] as String?,
+      json['booleanOperation'],
+      json['exportOptions'],
+      json['frame'] == null
+          ? null
+          : SketchRect.fromJson(json['frame'] as Map<String, dynamic>),
+      json['flow'] == null
+          ? null
+          : Flow.fromJson(json['flow'] as Map<String, dynamic>),
+      json['isFixedToViewport'] as bool?,
+      json['isFlippedHorizontal'] as bool?,
+      json['isFlippedVertical'] as bool?,
+      json['isLocked'] as bool?,
+      json['isVisible'] as bool?,
+      json['layerListExpandedType'],
+      json['name'] as String?,
+      json['nameIsFixed'] as bool?,
+      json['resizingConstraint'],
+      json['resizingType'],
+      json['rotation'] as num?,
+      json['sharedStyleID'],
+      json['shouldBreakMaskChain'] as bool?,
+      json['hasClippingMask'] as bool?,
+      json['clippingMaskMode'] as int?,
+      json['userInfo'],
+      json['style'] == null
+          ? null
+          : Style.fromJson(json['style'] as Map<String, dynamic>),
+      json['maintainScrollPosition'] as bool?,
+    )..type = json['type'] as String?;
 
 Map<String, dynamic> _$SketchNodeToJson(SketchNode instance) =>
     <String, dynamic>{

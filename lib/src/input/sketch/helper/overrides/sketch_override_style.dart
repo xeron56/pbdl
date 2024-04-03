@@ -10,7 +10,7 @@ class SketchOverrideStyle extends SketchOverrideType {
   final String TYPE_NAME = 'style';
 
   @override
-  Future<PBDLStyle> getProperty(SketchNode node) async {
+  Future<PBDLStyle?> getProperty(SketchNode node) async {
     if (node is! Style) {
       return null;
     }
@@ -21,5 +21,5 @@ class SketchOverrideStyle extends SketchOverrideType {
   String getPBDLType() => PBDLOverrideStyle.PBDL_TYPE_NAME;
 
   @override
-  String getValue(OverridableValue overrideValue) => overrideValue.value;
+  String? getValue(OverridableValue overrideValue) => overrideValue.value;
 }

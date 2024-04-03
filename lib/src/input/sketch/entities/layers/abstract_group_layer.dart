@@ -4,10 +4,10 @@ import 'sketch_node.dart';
 import 'flow.dart';
 
 abstract class AbstractGroupLayer extends SketchNode {
-  final bool hasClickThrough;
+  final bool? hasClickThrough;
   final dynamic groupLayout;
   @override
-  final List<SketchNode> children;
+  final List<SketchNode>? children;
 
   AbstractGroupLayer(
       this.hasClickThrough,
@@ -17,7 +17,7 @@ abstract class AbstractGroupLayer extends SketchNode {
       booleanOperation,
       exportOptions,
       boundaryRectangle,
-      Flow flow,
+      Flow? flow,
       isFixedToViewport,
       isFlippedHorizontal,
       isFlippedVertical,
@@ -28,13 +28,13 @@ abstract class AbstractGroupLayer extends SketchNode {
       nameIsFixed,
       resizingConstraint,
       resizingType,
-      num rotation,
+      num? rotation,
       sharedStyleID,
       shouldBreakMaskChain,
       hasClippingMask,
       clippingMaskMode,
       userInfo,
-      Style style,
+      Style? style,
       maintainScrollPosition)
       : super(
             UUID,
@@ -66,7 +66,7 @@ abstract class AbstractGroupLayer extends SketchNode {
 
   List<Map> getChildren() {
     List<Map> result = [];
-    for (var child in children) {
+    for (var child in children!) {
       // result.add((child as DesignNode).toPBDF()); // TODO: Uncomment this code
     }
     return result;

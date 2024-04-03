@@ -13,10 +13,10 @@ class PositionalCleansingService {
   SketchNode eliminateOffset(SketchNode rootNode) {
     if (rootNode is Group || rootNode is Artboard || rootNode is SymbolMaster) {
       _eliminateOffsetChildren(
-          (rootNode as AbstractGroupLayer).children, rootNode);
+          (rootNode as AbstractGroupLayer).children!, rootNode);
     }
     if (rootNode is AbstractGroupLayer) {
-      rootNode.children.map((layerNode) => eliminateOffset(layerNode)).toList();
+      rootNode.children!.map((layerNode) => eliminateOffset(layerNode)).toList();
     }
     return rootNode;
   }
@@ -24,8 +24,8 @@ class PositionalCleansingService {
   void _eliminateOffsetChildren(List children, SketchNode parent) =>
       children.forEach((child) {
         child.absoluteBoundingBox.x =
-            (parent.boundaryRectangle.x + child.absoluteBoundingBox.x);
+            (parent.boundaryRectangle!.x! + child.absoluteBoundingBox.x);
         child.absoluteBoundingBox.y =
-            (parent.boundaryRectangle.y + child.absoluteBoundingBox.y);
+            (parent.boundaryRectangle!.y! + child.absoluteBoundingBox.y);
       });
 }

@@ -6,13 +6,12 @@ part of 'context_settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ContextSettings _$ContextSettingsFromJson(Map<String, dynamic> json) {
-  return ContextSettings(
-    blendMode: (json['blendMode'] as num)?.toDouble(),
-    classField: json['_class'] as String,
-    opacity: (json['opacity'] as num)?.toDouble(),
-  );
-}
+ContextSettings _$ContextSettingsFromJson(Map<String, dynamic> json) =>
+    ContextSettings(
+      blendMode: (json['blendMode'] as num?)?.toDouble(),
+      classField: json['_class'] as String?,
+      opacity: (json['opacity'] as num?)?.toDouble(),
+    );
 
 Map<String, dynamic> _$ContextSettingsToJson(ContextSettings instance) =>
     <String, dynamic>{

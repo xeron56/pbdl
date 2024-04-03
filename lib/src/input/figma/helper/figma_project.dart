@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:get_it/get_it.dart';
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/canvas.dart';
 import 'package:pbdl/src/input/figma/entities/layers/component_set.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_frame.dart';
@@ -13,23 +17,23 @@ import '../entities/layers/canvas.dart';
 import 'figma_page.dart';
 
 class FigmaProject {
-  bool debug;
+  bool? debug;
 
   Logger log = Logger('FigmaProject');
 
   List<FigmaPage> pages = [];
 
-  String projectName;
+  String? projectName;
 
   var figmaJson;
 
-  String id;
+  String? id;
 
-  FigmaPage rootScreen;
+  FigmaPage? rootScreen;
 
-  GlobalStyleHolder globalStyles;
+  late GlobalStyleHolder globalStyles;
 
-  MainInfo _mainInfo;
+  late MainInfo _mainInfo;
 
   FigmaProject(
     this.projectName,
@@ -56,9 +60,8 @@ class FigmaProject {
 
     for (var entry in jsonStyles.entries) {
       // ?: [ApiCallService.getFileNodes] could return a [Map<String,dynamic>] to make this faster.
-      var figmaNode = stylingNodes.firstWhere(
-          (element) => element.UUID == entry.key,
-          orElse: () => null);
+      var figmaNode = stylingNodes.firstWhereOrNull(
+          (element) => element.UUID == entry.key);
       if (figmaNode != null) {
         // Need to condense all attributes into a single map for easier interpretation.
         var formattedJson = {
@@ -83,7 +86,7 @@ class FigmaProject {
 
       var node = Canvas.fromJson(canvas);
 
-      for (var layer in node.children) {
+      for (var layer in node.children!) {
         // Skip current screen if its convert property is false
 
         if (layer.UUID == node.prototypeStartNodeID && layer is FigmaFrame) {
@@ -92,7 +95,7 @@ class FigmaProject {
         // If node is a component set
         // Add each component as a screen
         if (layer is FigmaComponentSet) {
-          for (var child in layer.children) {
+          for (var child in layer.children!) {
             pg = _mainInfo.integrationStrategy.execute(child, pg);
           }
         }
@@ -114,7 +117,7 @@ class FigmaProject {
       UUID: id,
       pages: processedPages,
       pngPath: MainInfo().pngPath,
-      globalStyles: await globalStyles.interpretNode(),
+      globalStyles: await (globalStyles.interpretNode() as FutureOr<PBDLGlobalStyles?>),
     );
   }
 }

@@ -10,32 +10,32 @@ part 'pbdl_override_property.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLOverrideProperty extends PBDLNode implements PBDLNodeFactory {
   /// Value of the override property
-  PBDLNode value;
+  PBDLNode? value;
 
   @override
   final pbdlType = 'pbdl_override_property';
 
   @override
   @JsonKey(ignore: true)
-  bool isVisible;
+  bool? isVisible;
 
   @override
   @JsonKey(ignore: true)
-  PBDLBoundaryBox boundaryRectangle;
+  PBDLBoundaryBox? boundaryRectangle;
 
   @override
   @JsonKey(ignore: true)
-  PBDLStyle style;
+  PBDLStyle? style;
 
   @override
   @JsonKey(ignore: true)
-  String prototypeNodeUUID;
+  String? prototypeNodeUUID;
 
   /// Type of the override property
   final ovrType;
 
   PBDLOverrideProperty(
-    String UUID,
+    String? UUID,
     String name,
     this.ovrType,
     this.value,

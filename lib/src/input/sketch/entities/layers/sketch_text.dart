@@ -15,65 +15,65 @@ part 'sketch_text.g.dart';
 @JsonSerializable()
 class SketchText extends SketchNode implements SketchNodeFactory {
   @override
-  String CLASS_NAME = 'text';
+  String? CLASS_NAME = 'text';
 
-  final bool automaticallyDrawOnUnderlyingPath;
-  final bool dontSynchroniseWithSymbol;
+  final bool? automaticallyDrawOnUnderlyingPath;
+  final bool? dontSynchroniseWithSymbol;
   final dynamic lineSpacingBehaviour;
   final dynamic textBehaviour;
   final dynamic glyphBounds;
 
   @override
   @JsonKey(name: 'frame')
-  var boundaryRectangle;
+  SketchRect? boundaryRectangle;
 
   @override
   @JsonKey(name: 'do_objectID')
-  String UUID;
+  String? UUID;
 
   @override
   @JsonKey(name: '_class')
-  String type;
-  bool _isVisible;
+  String? type;
+  bool? _isVisible;
 
-  Style _style;
-
-  @override
-  void set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  Style? _style;
 
   @override
-  bool get isVisible => _isVisible;
+  void set isVisible(bool? _isVisible) => this._isVisible = _isVisible;
+
+  @override
+  bool? get isVisible => _isVisible;
 
   @override
   void set style(_style) => this._style = _style;
 
   @override
-  Style get style => _style;
+  Style? get style => _style;
 
   SketchText(
       {this.UUID,
       booleanOperation,
       exportOptions,
-      SketchRect this.boundaryRectangle,
-      Flow flow,
-      bool isFixedToViewport,
-      bool isFlippedHorizontal,
-      bool isFlippedVertical,
-      bool isLocked,
-      bool isVisible,
+      SketchRect? this.boundaryRectangle,
+      Flow? flow,
+      bool? isFixedToViewport,
+      bool? isFlippedHorizontal,
+      bool? isFlippedVertical,
+      bool? isLocked,
+      bool? isVisible,
       layerListExpandedType,
-      String name,
-      bool nameIsFixed,
+      String? name,
+      bool? nameIsFixed,
       resizingConstraint,
       resizingType,
-      double rotation,
+      double? rotation,
       sharedStyleID,
-      bool shouldBreakMaskChain,
-      bool hasClippingMask,
-      int clippingMaskMode,
+      bool? shouldBreakMaskChain,
+      bool? hasClippingMask,
+      int? clippingMaskMode,
       userInfo,
-      Style style,
-      bool maintainScrollPosition,
+      Style? style,
+      bool? maintainScrollPosition,
       this.attributedString,
       this.automaticallyDrawOnUnderlyingPath,
       this.dontSynchroniseWithSymbol,
@@ -123,7 +123,7 @@ class SketchText extends SketchNode implements SketchNodeFactory {
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: boundaryRectangle!.interpretFrame(),
       isFixedToViewport: isFixedToViewport,
       isFlippedHorizontal: isFlippedHorizontal,
       isFlippedVertical: isFlippedVertical,
@@ -134,20 +134,20 @@ class SketchText extends SketchNode implements SketchNodeFactory {
       nameIsFixed: nameIsFixed,
       resizingConstraint: resizingConstraint,
       resizingType: resizingType,
-      rotation: rotation,
+      rotation: rotation as double?,
       sharedStyleID: sharedStyleID,
       shouldBreakMaskChain: shouldBreakMaskChain,
       hasClippingMask: hasClippingMask,
       clippingMaskMode: clippingMaskMode,
       maintainScrollPosition: maintainScrollPosition,
-      style: style.interpretStyle(),
+      style: style!.interpretStyle(),
       content: content,
       prototypeNodeUUID: flow?.destinationArtboardID,
     ));
   }
 
   @JsonKey(ignore: true)
-  String content;
+  String? content;
 
   var attributedString;
 

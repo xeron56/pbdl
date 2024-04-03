@@ -17,44 +17,44 @@ part 'triangle.g.dart';
 @JsonSerializable()
 class Triangle extends AbstractShapeLayer implements SketchNodeFactory {
   @override
-  String CLASS_NAME = 'triangle';
+  String? CLASS_NAME = 'triangle';
   @override
   @JsonKey(name: 'frame')
-  var boundaryRectangle;
+  SketchRect? boundaryRectangle;
 
   @override
   @JsonKey(name: 'do_objectID')
-  String UUID;
+  String? UUID;
 
   @override
   @JsonKey(name: '_class')
-  String type;
+  String? type;
 
-  bool _isVisible;
+  bool? _isVisible;
 
-  Style _style;
-
-  @override
-  void set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  Style? _style;
 
   @override
-  bool get isVisible => _isVisible;
+  void set isVisible(bool? _isVisible) => this._isVisible = _isVisible;
+
+  @override
+  bool? get isVisible => _isVisible;
 
   @override
   void set style(_style) => this._style = _style;
 
   @override
-  Style get style => _style;
+  Style? get style => _style;
   Triangle(
-      {bool edited,
-      bool isClosed,
+      {bool? edited,
+      bool? isClosed,
       pointRadiusBehaviour,
-      List points,
+      List? points,
       this.UUID,
       booleanOperation,
       exportOptions,
-      SketchRect this.boundaryRectangle,
-      Flow flow,
+      SketchRect? this.boundaryRectangle,
+      Flow? flow,
       isFixedToViewport,
       isFlippedHorizontal,
       isFlippedVertical,
@@ -71,7 +71,7 @@ class Triangle extends AbstractShapeLayer implements SketchNodeFactory {
       hasClippingMask,
       clippingMaskMode,
       userInfo,
-      Style style,
+      Style? style,
       maintainScrollPosition})
       : _isVisible = isVisible,
         _style = style,
@@ -118,21 +118,21 @@ class Triangle extends AbstractShapeLayer implements SketchNodeFactory {
   @override
   Future<PBDLNode> interpretNode() async {
     var image = await SketchAssetProcessor()
-        .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
+        .processImage(UUID, boundaryRectangle!.width, boundaryRectangle!.height);
 
-    var ref = SketchAssetProcessor.writeImage(name, image);
+    var ref = SketchAssetProcessor.writeImage(name, image!);
     return Future.value(PBDLImage(
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: boundaryRectangle!.interpretFrame(),
       isFixedToViewport: isFixedToViewport,
       isFlippedHorizontal: isFlippedHorizontal,
       isFlippedVertical: isFlippedVertical,
       isLocked: isLocked,
       isVisible: isVisible,
       layerListExpandedType: layerListExpandedType,
-      name: name + '_${SketchAssetProcessor.imageNames[name]}',
+      name: name! + '_${SketchAssetProcessor.imageNames[name]}',
       nameIsFixed: nameIsFixed,
       constraints: resizingConstraint,
       resizingType: resizingType,
@@ -143,7 +143,7 @@ class Triangle extends AbstractShapeLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      style: style.interpretStyle(),
+      style: style!.interpretStyle(),
       imageReference: ref,
       prototypeNodeUUID: flow?.destinationArtboardID,
     ));

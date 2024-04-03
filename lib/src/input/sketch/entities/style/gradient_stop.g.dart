@@ -6,15 +6,13 @@ part of 'gradient_stop.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GradientStop _$GradientStopFromJson(Map<String, dynamic> json) {
-  return GradientStop(
-    classField: json['_class'] as String,
-    color: json['color'] == null
-        ? null
-        : Color.fromJson(json['color'] as Map<String, dynamic>),
-    position: (json['position'] as num)?.toDouble(),
-  );
-}
+GradientStop _$GradientStopFromJson(Map<String, dynamic> json) => GradientStop(
+      classField: json['_class'] as String?,
+      color: json['color'] == null
+          ? null
+          : Color.fromJson(json['color'] as Map<String, dynamic>),
+      position: (json['position'] as num?)?.toDouble(),
+    );
 
 Map<String, dynamic> _$GradientStopToJson(GradientStop instance) =>
     <String, dynamic>{

@@ -9,7 +9,7 @@ part 'document.g.dart';
 // description: The document entry in a Sketch file.
 @JsonSerializable()
 class Document extends AbstractDocument {
-  List pages;
+  List? pages;
 
   Document(
       this.pages,
@@ -17,15 +17,15 @@ class Document extends AbstractDocument {
       assets,
       colorSpace,
       currentPageIndex,
-      List foreignLayerStyles,
-      List<ForeignSymbol> foreignSymbols,
-      List foreignTextStyles,
+      List? foreignLayerStyles,
+      List<ForeignSymbol>? foreignSymbols,
+      List? foreignTextStyles,
       layerStyles,
       layerTextStyles,
       layerSymbols,
-      List embeddedFontReferences,
-      bool autoEmbedFonts,
-      bool agreedToFontEmbedding)
+      List? embeddedFontReferences,
+      bool? autoEmbedFonts,
+      bool? agreedToFontEmbedding)
       : super(
             UUID,
             assets,

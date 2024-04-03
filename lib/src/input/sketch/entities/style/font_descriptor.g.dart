@@ -6,11 +6,10 @@ part of 'font_descriptor.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-FontDescriptor _$FontDescriptorFromJson(Map<String, dynamic> json) {
-  return FontDescriptor(
-    rawAttributes: json['attributes'] as Map<String, dynamic>,
-  );
-}
+FontDescriptor _$FontDescriptorFromJson(Map<String, dynamic> json) =>
+    FontDescriptor(
+      rawAttributes: json['attributes'] as Map<String, dynamic>,
+    );
 
 Map<String, dynamic> _$FontDescriptorToJson(FontDescriptor instance) =>
     <String, dynamic>{

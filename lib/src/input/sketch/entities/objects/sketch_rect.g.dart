@@ -6,16 +6,14 @@ part of 'sketch_rect.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SketchRect _$SketchRectFromJson(Map<String, dynamic> json) {
-  return SketchRect(
-    classField: json['_class'] as String,
-    constrainProportions: json['constrainProportions'] as bool,
-    x: (json['x'] as num)?.toDouble(),
-    y: (json['y'] as num)?.toDouble(),
-    width: (json['width'] as num)?.toDouble(),
-    height: (json['height'] as num)?.toDouble(),
-  );
-}
+SketchRect _$SketchRectFromJson(Map<String, dynamic> json) => SketchRect(
+      classField: json['_class'] as String?,
+      constrainProportions: json['constrainProportions'] as bool?,
+      x: (json['x'] as num?)?.toDouble(),
+      y: (json['y'] as num?)?.toDouble(),
+      width: (json['width'] as num?)?.toDouble(),
+      height: (json['height'] as num?)?.toDouble(),
+    );
 
 Map<String, dynamic> _$SketchRectToJson(SketchRect instance) =>
     <String, dynamic>{

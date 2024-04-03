@@ -18,18 +18,18 @@ part 'bitmap.g.dart';
 // description: Bitmap layers house a single image
 class Bitmap extends SketchNode implements SketchNodeFactory {
   @override
-  String CLASS_NAME = 'bitmap';
-  final bool fillReplacesImage;
-  final int intendedDPI;
+  String? CLASS_NAME = 'bitmap';
+  final bool? fillReplacesImage;
+  final int? intendedDPI;
   final dynamic clippingMask;
 
   @override
   @JsonKey(name: 'frame')
-  var boundaryRectangle;
+  SketchRect? boundaryRectangle;
 
   @override
   @JsonKey(name: 'do_objectID')
-  String UUID;
+  String? UUID;
 
   Bitmap({
     this.imageReference,
@@ -39,8 +39,8 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
     this.UUID,
     booleanOperation,
     exportOptions,
-    SketchRect this.boundaryRectangle,
-    Flow flow,
+    SketchRect? this.boundaryRectangle,
+    Flow? flow,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
@@ -51,13 +51,13 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
     nameIsFixed,
     resizingConstraint,
     resizingType,
-    num rotation,
+    num? rotation,
     sharedStyleID,
     shouldBreakMaskChain,
     hasClippingMask,
     clippingMaskMode,
     userInfo,
-    Style style,
+    Style? style,
     maintainScrollPosition,
     this.imageReferenceMap = const {},
   })  : _isVisible = isVisible,
@@ -99,13 +99,13 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
-    imageReference = p.join(MainInfo().pngPath, p.basename(imageReference));
+    imageReference = p.join(MainInfo().pngPath!, p.basename(imageReference!));
     return Future.value(PBDLImage(
       imageReference: imageReference,
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: boundaryRectangle!.interpretFrame(),
       isFixedToViewport: isFixedToViewport,
       isFlippedHorizontal: isFlippedHorizontal,
       isFlippedVertical: isFlippedVertical,
@@ -122,7 +122,7 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
       clippingMaskMode: clippingMask,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      style: style.interpretStyle(),
+      style: style!.interpretStyle(),
       prototypeNodeUUID: flow?.destinationArtboardID,
     ));
   }
@@ -131,23 +131,23 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
   Map imageReferenceMap;
 
   @JsonKey(ignore: true)
-  String imageReference;
+  String? imageReference;
 
   @override
   @JsonKey(name: '_class')
-  String type;
+  String? type;
 
-  bool _isVisible;
+  bool? _isVisible;
 
-  Style _style;
+  Style? _style;
 
-  set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  set isVisible(bool? _isVisible) => this._isVisible = _isVisible;
 
   @override
-  bool get isVisible => _isVisible;
+  bool? get isVisible => _isVisible;
 
   set style(_style) => this._style = _style;
 
   @override
-  Style get style => _style;
+  Style? get style => _style;
 }

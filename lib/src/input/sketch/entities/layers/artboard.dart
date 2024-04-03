@@ -16,15 +16,15 @@ part 'artboard.g.dart';
 class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   @JsonKey(name: 'layers')
-  List<SketchNode> children;
+  List<SketchNode>? children;
 
   @override
-  String CLASS_NAME = 'artboard';
+  String? CLASS_NAME = 'artboard';
   @override
   @JsonKey(name: '_class')
-  String type;
-  final bool includeInCloudUpload;
-  final bool includeBackgroundColorInExport;
+  String? type;
+  final bool? includeInCloudUpload;
+  final bool? includeBackgroundColorInExport;
   final dynamic horizontalRulerData;
   final dynamic verticalRulerData;
   final dynamic layout;
@@ -32,34 +32,34 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
 
   @override
   @JsonKey(name: 'frame')
-  SketchRect boundaryRectangle;
+  SketchRect? boundaryRectangle;
 
-  Color backgroundColor;
+  Color? backgroundColor;
 
   @override
   @JsonKey(name: 'do_objectID')
-  String UUID;
+  String? UUID;
 
-  final bool hasBackgroundColor;
-  final bool isFlowHome;
-  final bool resizesContent;
+  final bool? hasBackgroundColor;
+  final bool? isFlowHome;
+  final bool? resizesContent;
   final dynamic presetDictionary;
 
-  bool _isVisible;
+  bool? _isVisible;
 
-  Style _style;
-
-  @override
-  void set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  Style? _style;
 
   @override
-  bool get isVisible => _isVisible;
+  void set isVisible(bool? _isVisible) => this._isVisible = _isVisible;
+
+  @override
+  bool? get isVisible => _isVisible;
 
   @override
   void set style(_style) => this._style = _style;
 
   @override
-  Style get style => _style;
+  Style? get style => _style;
 
   Artboard(
       {this.includeInCloudUpload,
@@ -68,7 +68,7 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
       this.verticalRulerData,
       this.layout,
       this.grid,
-      Color this.backgroundColor,
+      Color? this.backgroundColor,
       this.hasBackgroundColor,
       this.isFlowHome,
       this.resizesContent,
@@ -80,7 +80,7 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
       booleanOperation,
       exportOptions,
       this.boundaryRectangle,
-      Flow flow,
+      Flow? flow,
       isFixedToViewport,
       isFlippedHorizontal,
       isFlippedVertical,
@@ -97,18 +97,18 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
       hasClippingMask,
       clippingMaskMode,
       userInfo,
-      Style style,
+      Style? style,
       maintainScrollPosition})
       : _isVisible = isVisible,
         _style = style,
         super(
             hasClickThrough,
             groupLayout,
-            (children as List<SketchNode>),
+            (children as List<SketchNode>?),
             UUID,
             booleanOperation,
             exportOptions,
-            boundaryRectangle as SketchRect,
+            boundaryRectangle as SketchRect?,
             flow,
             isFixedToViewport,
             isFlippedHorizontal,
@@ -140,14 +140,14 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   Future<PBDLNode> interpretNode() async {
     return Future.value(PBDLArtboard(
-      backgroundColor: backgroundColor.interpretColor(),
+      backgroundColor: backgroundColor!.interpretColor(),
       isFlowHome: isFlowHome,
       hasClickThrough: hasClickThrough,
       groupLayout: groupLayout,
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: boundaryRectangle!.interpretFrame(),
       flow: flow?.interpretFlow(),
       isFixedToViewport: isFixedToViewport,
       isFlippedHorizontal: isFlippedHorizontal,
@@ -166,9 +166,9 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
       prototypeNodeUUID: flow?.destinationArtboardID,
-      style: style.interpretStyle(),
+      style: style!.interpretStyle(),
       children: await Future.wait(
-          children.map((e) async => await e.interpretNode()).toList()),
+          children!.map((e) async => await e.interpretNode()).toList()),
     ));
   }
 

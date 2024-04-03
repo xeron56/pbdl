@@ -7,10 +7,10 @@ import 'sketch_node.dart';
 import 'flow.dart';
 
 abstract class AbstractShapeLayer extends SketchNode {
-  final bool edited;
-  final bool isClosed;
+  final bool? edited;
+  final bool? isClosed;
   final dynamic pointRadiusBehaviour;
-  final List points;
+  final List? points;
 
   AbstractShapeLayer(
       this.edited,
@@ -20,8 +20,8 @@ abstract class AbstractShapeLayer extends SketchNode {
       UUID,
       booleanOperation,
       exportOptions,
-      SketchRect boundaryRectangle,
-      Flow flow,
+      SketchRect? boundaryRectangle,
+      Flow? flow,
       isFixedToViewport,
       isFlippedHorizontal,
       isFlippedVertical,
@@ -32,13 +32,13 @@ abstract class AbstractShapeLayer extends SketchNode {
       nameIsFixed,
       resizingConstraint,
       resizingType,
-      num rotation,
+      num? rotation,
       sharedStyleID,
       shouldBreakMaskChain,
       hasClippingMask,
       clippingMaskMode,
       userInfo,
-      Style style,
+      Style? style,
       maintainScrollPosition)
       : super(
             UUID,

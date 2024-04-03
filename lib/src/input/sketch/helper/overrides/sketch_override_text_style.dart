@@ -10,7 +10,7 @@ class SketchOverrideTextStyle extends SketchOverrideType {
   final String TYPE_NAME = 'textStyle';
 
   @override
-  Future<PBDLTextStyle> getProperty(SketchNode node) {
+  Future<PBDLTextStyle>? getProperty(SketchNode node) {
     if (node is! TextStyle) {
       return null;
     }
@@ -21,5 +21,5 @@ class SketchOverrideTextStyle extends SketchOverrideType {
   String getPBDLType() => PBDLOverrideTextStyle.PBDL_TYPE_NAME;
 
   @override
-  String getValue(OverridableValue overrideValue) => overrideValue.value;
+  String? getValue(OverridableValue overrideValue) => overrideValue.value;
 }

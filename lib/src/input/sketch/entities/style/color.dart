@@ -6,12 +6,12 @@ part 'color.g.dart';
 @JsonSerializable()
 class Color {
   @JsonKey(name: '_class')
-  final String classField;
-  double alpha, blue, green, red;
+  final String? classField;
+  double? alpha, blue, green, red;
 
   Color({this.alpha, this.blue, this.classField, this.green, this.red});
 
-  factory Color.fromJson(Map json) => _$ColorFromJson(json);
+  factory Color.fromJson(Map json) => _$ColorFromJson(json as Map<String, dynamic>);
   Map toJson() => _$ColorToJson(this);
 
   PBDLColor interpretColor() {
@@ -20,7 +20,7 @@ class Color {
 }
 
 mixin PBColorMixin {
-  String toHex(Color color) {
+  String toHex(Color? color) {
     if (color != null) {
       int a, r, g, b;
       a = ((color.alpha ?? 0) * 255).round();
@@ -33,7 +33,7 @@ mixin PBColorMixin {
     }
   }
 
-  String findDefaultColor(String hex) {
+  String? findDefaultColor(String hex) {
     switch (hex) {
       case '0xffffffff':
         return 'Colors.white';

@@ -10,8 +10,8 @@ part 'override_property.g.dart';
 class OverridableProperty extends SketchOverride {
   static final String CLASS_NAME = 'MSImmutableOverrideProperty';
   @override
-  final String overrideName;
-  final bool canOverride;
+  final String? overrideName;
+  final bool? canOverride;
 
   OverridableProperty(this.overrideName, this.canOverride);
 

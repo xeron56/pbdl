@@ -6,51 +6,48 @@ part of 'symbol_instance.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SymbolInstance _$SymbolInstanceFromJson(Map<String, dynamic> json) {
-  return SymbolInstance(
-    UUID: json['do_objectID'] as String,
-    booleanOperation: json['booleanOperation'],
-    exportOptions: json['exportOptions'],
-    boundaryRectangle: json['frame'] == null
-        ? null
-        : SketchRect.fromJson(json['frame'] as Map<String, dynamic>),
-    flow: json['flow'] == null
-        ? null
-        : Flow.fromJson(json['flow'] as Map<String, dynamic>),
-    isFixedToViewport: json['isFixedToViewport'] as bool,
-    isFlippedHorizontal: json['isFlippedHorizontal'] as bool,
-    isFlippedVertical: json['isFlippedVertical'] as bool,
-    isLocked: json['isLocked'] as bool,
-    isVisible: json['isVisible'] as bool,
-    layerListExpandedType: json['layerListExpandedType'],
-    name: json['name'] as String,
-    nameIsFixed: json['nameIsFixed'] as bool,
-    resizingConstraint: json['resizingConstraint'],
-    resizingType: json['resizingType'],
-    rotation: json['rotation'] as num,
-    sharedStyleID: json['sharedStyleID'],
-    shouldBreakMaskChain: json['shouldBreakMaskChain'] as bool,
-    hasClippingMask: json['hasClippingMask'] as bool,
-    clippingMaskMode: json['clippingMaskMode'] as int,
-    userInfo: json['userInfo'],
-    style: json['style'] == null
-        ? null
-        : Style.fromJson(json['style'] as Map<String, dynamic>),
-    maintainScrollPosition: json['maintainScrollPosition'] as bool,
-    overrideValues: (json['overrideValues'] as List)
-        ?.map((e) => e == null
-            ? null
-            : OverridableValue.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    scale: (json['scale'] as num)?.toDouble(),
-    symbolID: json['symbolID'] as String,
-    verticalSpacing: (json['verticalSpacing'] as num)?.toDouble(),
-    horizontalSpacing: (json['horizontalSpacing'] as num)?.toDouble(),
-  )
-    ..CLASS_NAME = json['CLASS_NAME'] as String
-    ..type = json['_class'] as String
-    ..parameters = json['parameters'] as List;
-}
+SymbolInstance _$SymbolInstanceFromJson(Map<String, dynamic> json) =>
+    SymbolInstance(
+      UUID: json['do_objectID'] as String?,
+      booleanOperation: json['booleanOperation'],
+      exportOptions: json['exportOptions'],
+      boundaryRectangle: json['frame'] == null
+          ? null
+          : SketchRect.fromJson(json['frame'] as Map<String, dynamic>),
+      flow: json['flow'] == null
+          ? null
+          : Flow.fromJson(json['flow'] as Map<String, dynamic>),
+      isFixedToViewport: json['isFixedToViewport'] as bool?,
+      isFlippedHorizontal: json['isFlippedHorizontal'] as bool?,
+      isFlippedVertical: json['isFlippedVertical'] as bool?,
+      isLocked: json['isLocked'] as bool?,
+      isVisible: json['isVisible'] as bool?,
+      layerListExpandedType: json['layerListExpandedType'],
+      name: json['name'] as String?,
+      nameIsFixed: json['nameIsFixed'] as bool?,
+      resizingConstraint: json['resizingConstraint'],
+      resizingType: json['resizingType'],
+      rotation: json['rotation'] as num?,
+      sharedStyleID: json['sharedStyleID'],
+      shouldBreakMaskChain: json['shouldBreakMaskChain'] as bool?,
+      hasClippingMask: json['hasClippingMask'] as bool?,
+      clippingMaskMode: json['clippingMaskMode'] as int?,
+      userInfo: json['userInfo'],
+      style: json['style'] == null
+          ? null
+          : Style.fromJson(json['style'] as Map<String, dynamic>),
+      maintainScrollPosition: json['maintainScrollPosition'] as bool?,
+      overrideValues: (json['overrideValues'] as List<dynamic>?)
+          ?.map((e) => OverridableValue.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      scale: (json['scale'] as num?)?.toDouble(),
+      symbolID: json['symbolID'] as String?,
+      verticalSpacing: (json['verticalSpacing'] as num?)?.toDouble(),
+      horizontalSpacing: (json['horizontalSpacing'] as num?)?.toDouble(),
+    )
+      ..CLASS_NAME = json['CLASS_NAME'] as String?
+      ..type = json['_class'] as String?
+      ..parameters = json['parameters'] as List<dynamic>?;
 
 Map<String, dynamic> _$SymbolInstanceToJson(SymbolInstance instance) =>
     <String, dynamic>{

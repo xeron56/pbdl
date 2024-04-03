@@ -17,7 +17,7 @@ part 'page.g.dart';
 @JsonSerializable()
 class Page extends AbstractGroupLayer implements SketchNodeFactory {
   @override
-  String CLASS_NAME = 'page';
+  String? CLASS_NAME = 'page';
   dynamic includeInCloudUpload;
   dynamic horizontalRulerData;
   dynamic verticalRulerData;
@@ -26,45 +26,45 @@ class Page extends AbstractGroupLayer implements SketchNodeFactory {
 
   @override
   @JsonKey(name: 'frame')
-  var boundaryRectangle;
+  SketchRect? boundaryRectangle;
 
   @override
   @JsonKey(name: 'do_objectID')
-  String UUID;
+  String? UUID;
 
   @override
   @JsonKey(name: '_class')
-  String type;
+  String? type;
 
-  bool _isVisible;
+  bool? _isVisible;
 
-  Style _style;
+  Style? _style;
 
   @override
   @JsonKey(name: 'layers')
-  List<SketchNode> children;
+  List<SketchNode>? children;
 
   @override
-  void set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  void set isVisible(bool? _isVisible) => this._isVisible = _isVisible;
 
   @override
-  bool get isVisible => _isVisible;
+  bool? get isVisible => _isVisible;
 
   @override
   void set style(_style) => this._style = _style;
 
   @override
-  Style get style => _style;
+  Style? get style => _style;
 
   Page(
-      {bool hasClickThrough,
+      {bool? hasClickThrough,
       groupLayout,
-      List<SketchNode> this.children,
+      List<SketchNode>? this.children,
       this.UUID,
       booleanOperation,
       exportOptions,
-      SketchRect this.boundaryRectangle,
-      Flow flow,
+      SketchRect? this.boundaryRectangle,
+      Flow? flow,
       isFixedToViewport,
       isFlippedHorizontal,
       isFlippedVertical,
@@ -81,7 +81,7 @@ class Page extends AbstractGroupLayer implements SketchNodeFactory {
       hasClippingMask,
       clippingMaskMode,
       userInfo,
-      Style style,
+      Style? style,
       maintainScrollPosition})
       : _isVisible = isVisible,
         _style = style,
@@ -125,7 +125,7 @@ class Page extends AbstractGroupLayer implements SketchNodeFactory {
       name: name,
       UUID: UUID,
       screens:
-          await Future.wait(children.map((e) => e.interpretNode()).toList()),
+          await Future.wait(children!.map((e) => e.interpretNode()).toList()),
     ));
   }
 }

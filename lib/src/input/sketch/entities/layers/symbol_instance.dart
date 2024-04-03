@@ -18,65 +18,65 @@ part 'symbol_instance.g.dart';
 @JsonSerializable()
 class SymbolInstance extends SketchNode implements SketchNodeFactory {
   @override
-  String CLASS_NAME = 'symbolInstance';
-  final List<OverridableValue> overrideValues;
-  final double scale;
-  String symbolID;
-  final double verticalSpacing;
-  final double horizontalSpacing;
+  String? CLASS_NAME = 'symbolInstance';
+  final List<OverridableValue>? overrideValues;
+  final double? scale;
+  String? symbolID;
+  final double? verticalSpacing;
+  final double? horizontalSpacing;
 
   @override
   @JsonKey(name: 'frame')
-  var boundaryRectangle;
+  SketchRect? boundaryRectangle;
 
   @override
   @JsonKey(name: 'do_objectID')
-  String UUID;
+  String? UUID;
 
   @override
   @JsonKey(name: '_class')
-  String type;
+  String? type;
 
-  bool _isVisible;
+  bool? _isVisible;
 
-  Style _style;
+  Style? _style;
 
-  set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  set isVisible(bool? _isVisible) => this._isVisible = _isVisible;
 
   @override
-  bool get isVisible => _isVisible;
+  bool? get isVisible => _isVisible;
 
   set style(_style) => this._style = _style;
 
   @override
-  Style get style => _style;
+  Style? get style => _style;
 
-  List parameters;
+  List? parameters;
 
   SymbolInstance(
       {this.UUID,
       booleanOperation,
       exportOptions,
-      SketchRect this.boundaryRectangle,
-      Flow flow,
-      bool isFixedToViewport,
-      bool isFlippedHorizontal,
-      bool isFlippedVertical,
-      bool isLocked,
-      bool isVisible,
+      SketchRect? this.boundaryRectangle,
+      Flow? flow,
+      bool? isFixedToViewport,
+      bool? isFlippedHorizontal,
+      bool? isFlippedVertical,
+      bool? isLocked,
+      bool? isVisible,
       layerListExpandedType,
-      String name,
-      bool nameIsFixed,
+      String? name,
+      bool? nameIsFixed,
       resizingConstraint,
       resizingType,
-      num rotation,
+      num? rotation,
       sharedStyleID,
-      bool shouldBreakMaskChain,
-      bool hasClippingMask,
-      int clippingMaskMode,
+      bool? shouldBreakMaskChain,
+      bool? hasClippingMask,
+      int? clippingMaskMode,
       userInfo,
-      Style style,
-      bool maintainScrollPosition,
+      Style? style,
+      bool? maintainScrollPosition,
       this.overrideValues,
       this.scale,
       this.symbolID,
@@ -140,8 +140,8 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
-    var overrides = overrideValues.map((e) {
-      var uuidTypeMap = SymbolNodeMixin.extractParameter(e.overrideName);
+    var overrides = overrideValues!.map((e) {
+      var uuidTypeMap = SymbolNodeMixin.extractParameter(e.overrideName!);
 
       var ovrVal = SketchOverrideTypeFactory.getType(e);
 
@@ -158,9 +158,9 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
 
     return Future.value(PBDLSharedInstanceNode(
       UUID: UUID,
-      overrideValues: overrides,
+      overrideValues: overrides as List<PBDLOverrideValue>?,
       booleanOperation: booleanOperation,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: boundaryRectangle!.interpretFrame(),
       clippingMaskMode: clippingMaskMode,
       exportOptions: exportOptions,
       hasClippingMask: hasClippingMask,
@@ -180,7 +180,7 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
       scale: scale,
       sharedStyleID: sharedStyleID,
       shouldBreakMaskChain: shouldBreakMaskChain,
-      style: style.interpretStyle(),
+      style: style!.interpretStyle(),
       symbolID: symbolID,
       userInfo: userInfo,
       verticalSpacing: verticalSpacing,

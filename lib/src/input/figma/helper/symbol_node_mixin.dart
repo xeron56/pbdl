@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:recase/recase.dart';
 
 // both need to be global because a symbol instance could have multiple master symbols with name conflicts
-Map<String, String> SN_UUIDtoVarName = {};
+Map<String, String?> SN_UUIDtoVarName = {};
 Map<String, int> varNameCount = {};
 
 mixin SymbolNodeMixin {
@@ -16,7 +16,7 @@ mixin SymbolNodeMixin {
   // };
 
   // should have been a Map<UUID, SketchNode> but iterate slowly through the list
-  String FindName(String uuid, List children, Type type) {
+  String? FindName(String? uuid, List children, Type? type) {
     // for (var child in children) {
     //   if (child.UUID == uuid) {
     //     var name =

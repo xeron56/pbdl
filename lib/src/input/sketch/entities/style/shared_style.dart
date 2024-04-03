@@ -6,24 +6,24 @@ import 'font_descriptor.dart';
 import 'style.dart';
 part 'shared_style.g.dart';
 
-Map<String, String> SharedStyle_UUIDToName = {};
+Map<String?, String> SharedStyle_UUIDToName = {};
 
 @JsonSerializable()
 class SharedStyle with PBColorMixin {
   @JsonKey(name: '_class')
-  final String classField;
+  final String? classField;
   @override
   @JsonKey(name: 'do_objectID')
-  String UUID;
+  String? UUID;
   @JsonKey(name: 'name')
   String name;
   @JsonKey(name: 'value')
-  Style style;
+  Style? style;
 
   SharedStyle({
     this.classField,
     this.UUID,
-    this.name,
+    required this.name,
     this.style,
   }) {
     name = name.camelCase;
@@ -39,8 +39,8 @@ class SharedStyle with PBColorMixin {
 
     if (style != null) {
       // TODO: implement SharedStyle.style to flutter style parameters.
-      if (style.textStyle != null) {
-        var source = style.textStyle;
+      if (style!.textStyle != null) {
+        var source = style!.textStyle!;
         var fontDescriptor = source.fontDescriptor as FontDescriptor;
         buffer.write('TextStyle ${name} = TextStyle(\n');
         if (fontDescriptor.fontName != null) {
@@ -78,6 +78,6 @@ class SharedStyle with PBColorMixin {
     return buffer.toString();
   }
 
-  factory SharedStyle.fromJson(Map json) => _$SharedStyleFromJson(json);
+  factory SharedStyle.fromJson(Map json) => _$SharedStyleFromJson(json as Map<String, dynamic>);
   Map<String, dynamic> toJson() => _$SharedStyleToJson(this);
 }

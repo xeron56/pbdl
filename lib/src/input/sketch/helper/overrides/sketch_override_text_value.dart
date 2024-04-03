@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:pbdl/src/input/general_helper/overrides/pbdl_override_text_value.dart';
 import 'package:pbdl/src/input/sketch/entities/layers/sketch_node.dart';
 import 'package:pbdl/src/input/sketch/entities/layers/sketch_text.dart';
@@ -10,16 +12,16 @@ class SketchOverrideTextValue extends SketchOverrideType {
   final String TYPE_NAME = 'stringValue';
 
   @override
-  Future<PBDLText> getProperty(SketchNode node) async {
+  Future<PBDLText?> getProperty(SketchNode node) async {
     if (node is! SketchText) {
       return null;
     }
-    return await (node as SketchText).interpretNode();
+    return await (node.interpretNode() as FutureOr<PBDLText?>);
   }
 
   @override
   String getPBDLType() => PBDLOverrideTextValue.PBDL_TYPE_NAME;
 
   @override
-  String getValue(OverridableValue overrideValue) => overrideValue.value;
+  String? getValue(OverridableValue overrideValue) => overrideValue.value;
 }

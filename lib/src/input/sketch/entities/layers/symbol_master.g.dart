@@ -6,70 +6,65 @@ part of 'symbol_master.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SymbolMaster _$SymbolMasterFromJson(Map<String, dynamic> json) {
-  return SymbolMaster(
-    hasClickThrough: json['hasClickThrough'] as bool,
-    groupLayout: json['groupLayout'],
-    children: (json['layers'] as List)
-        ?.map((e) =>
-            e == null ? null : SketchNode.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    UUID: json['do_objectID'] as String,
-    booleanOperation: json['booleanOperation'],
-    exportOptions: json['exportOptions'],
-    boundaryRectangle: json['frame'] == null
-        ? null
-        : SketchRect.fromJson(json['frame'] as Map<String, dynamic>),
-    flow: json['flow'] == null
-        ? null
-        : Flow.fromJson(json['flow'] as Map<String, dynamic>),
-    isFixedToViewport: json['isFixedToViewport'],
-    isFlippedHorizontal: json['isFlippedHorizontal'],
-    isFlippedVertical: json['isFlippedVertical'],
-    isLocked: json['isLocked'],
-    isVisible: json['isVisible'],
-    layerListExpandedType: json['layerListExpandedType'],
-    name: json['name'],
-    nameIsFixed: json['nameIsFixed'],
-    resizingConstraint: json['resizingConstraint'],
-    resizingType: json['resizingType'],
-    rotation: json['rotation'],
-    sharedStyleID: json['sharedStyleID'],
-    shouldBreakMaskChain: json['shouldBreakMaskChain'],
-    hasClippingMask: json['hasClippingMask'],
-    clippingMaskMode: json['clippingMaskMode'],
-    userInfo: json['userInfo'],
-    style: json['style'] == null
-        ? null
-        : Style.fromJson(json['style'] as Map<String, dynamic>),
-    maintainScrollPosition: json['maintainScrollPosition'],
-    backgroundColor: json['backgroundColor'] == null
-        ? null
-        : Color.fromJson(json['backgroundColor'] as Map<String, dynamic>),
-    hasBackgroundColor: json['hasBackgroundColor'] as bool,
-    horizontalRulerData: json['horizontalRulerData'],
-    includeBackgroundColorInExport:
-        json['includeBackgroundColorInExport'] as bool,
-    includeInCloudUpload: json['includeInCloudUpload'] as bool,
-    isFlowHome: json['isFlowHome'] as bool,
-    resizesContent: json['resizesContent'] as bool,
-    verticalRulerData: json['verticalRulerData'],
-    includeBackgroundColorInInstance:
-        json['includeBackgroundColorInInstance'] as bool,
-    symbolID: json['symbolID'] as String,
-    changeIdentifier: json['changeIdentifier'] as int,
-    allowsOverrides: json['allowsOverrides'] as bool,
-    overrideProperties: (json['overrideProperties'] as List)
-        ?.map((e) => e == null
-            ? null
-            : OverridableProperty.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    presetDictionary: json['presetDictionary'],
-  )
-    ..CLASS_NAME = json['CLASS_NAME'] as String
-    ..type = json['_class'] as String
-    ..parameters = json['parameters'] as List;
-}
+SymbolMaster _$SymbolMasterFromJson(Map<String, dynamic> json) => SymbolMaster(
+      hasClickThrough: json['hasClickThrough'] as bool?,
+      groupLayout: json['groupLayout'],
+      children: (json['layers'] as List<dynamic>?)
+          ?.map((e) => SketchNode.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      UUID: json['do_objectID'] as String?,
+      booleanOperation: json['booleanOperation'],
+      exportOptions: json['exportOptions'],
+      boundaryRectangle: json['frame'] == null
+          ? null
+          : SketchRect.fromJson(json['frame'] as Map<String, dynamic>),
+      flow: json['flow'] == null
+          ? null
+          : Flow.fromJson(json['flow'] as Map<String, dynamic>),
+      isFixedToViewport: json['isFixedToViewport'],
+      isFlippedHorizontal: json['isFlippedHorizontal'],
+      isFlippedVertical: json['isFlippedVertical'],
+      isLocked: json['isLocked'],
+      isVisible: json['isVisible'],
+      layerListExpandedType: json['layerListExpandedType'],
+      name: json['name'],
+      nameIsFixed: json['nameIsFixed'],
+      resizingConstraint: json['resizingConstraint'],
+      resizingType: json['resizingType'],
+      rotation: json['rotation'],
+      sharedStyleID: json['sharedStyleID'],
+      shouldBreakMaskChain: json['shouldBreakMaskChain'],
+      hasClippingMask: json['hasClippingMask'],
+      clippingMaskMode: json['clippingMaskMode'],
+      userInfo: json['userInfo'],
+      style: json['style'] == null
+          ? null
+          : Style.fromJson(json['style'] as Map<String, dynamic>),
+      maintainScrollPosition: json['maintainScrollPosition'],
+      backgroundColor: json['backgroundColor'] == null
+          ? null
+          : Color.fromJson(json['backgroundColor'] as Map<String, dynamic>),
+      hasBackgroundColor: json['hasBackgroundColor'] as bool?,
+      horizontalRulerData: json['horizontalRulerData'],
+      includeBackgroundColorInExport:
+          json['includeBackgroundColorInExport'] as bool?,
+      includeInCloudUpload: json['includeInCloudUpload'] as bool?,
+      isFlowHome: json['isFlowHome'] as bool?,
+      resizesContent: json['resizesContent'] as bool?,
+      verticalRulerData: json['verticalRulerData'],
+      includeBackgroundColorInInstance:
+          json['includeBackgroundColorInInstance'] as bool?,
+      symbolID: json['symbolID'] as String?,
+      changeIdentifier: json['changeIdentifier'] as int?,
+      allowsOverrides: json['allowsOverrides'] as bool?,
+      overrideProperties: (json['overrideProperties'] as List<dynamic>?)
+          ?.map((e) => OverridableProperty.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      presetDictionary: json['presetDictionary'],
+    )
+      ..CLASS_NAME = json['CLASS_NAME'] as String?
+      ..type = json['_class'] as String?
+      ..parameters = json['parameters'] as List<dynamic>?;
 
 Map<String, dynamic> _$SymbolMasterToJson(SymbolMaster instance) =>
     <String, dynamic>{

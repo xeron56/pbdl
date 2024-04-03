@@ -11,9 +11,9 @@ part 'override_value.g.dart';
 class OverridableValue extends SketchOverride {
   static final String CLASS_NAME = 'overrideValue';
   @override
-  final String overrideName;
+  final String? overrideName;
   @JsonKey(name: 'do_objectID')
-  final String UUID;
+  final String? UUID;
   final dynamic value;
 
   OverridableValue(this.overrideName, this.UUID, this.value);

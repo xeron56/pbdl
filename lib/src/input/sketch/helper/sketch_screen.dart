@@ -4,18 +4,18 @@ import '../entities/abstract_sketch_node_factory.dart';
 import '../entities/layers/sketch_node.dart';
 
 class SketchScreen {
-  String id;
-  String name;
+  String? id;
+  String? name;
   bool convert = true;
-  String imageURI;
-  String type;
-  SketchNode designNode;
+  String? imageURI;
+  String? type;
+  SketchNode? designNode;
 
   // Do we still need this?
   // DesignPage parentPage;
 
   SketchScreen({
-    SketchNode designNode,
+    SketchNode? designNode,
     this.id,
     this.name,
     this.type,
@@ -30,18 +30,18 @@ class SketchScreen {
     }
     return screen;
   }
-  Map<String, Object> toJson() {
-    var result = <String, Object>{'azure_blob_uri': imageURI};
-    result.addAll(designNode.toJson());
+  Map<String, Object?> toJson() {
+    var result = <String, Object?>{'azure_blob_uri': imageURI};
+    result.addAll(designNode!.toJson());
     return result;
   }
 
   @override
-  String CLASS_NAME;
+  String? CLASS_NAME;
 
   Future<PBDLScreen> interpretNode() async {
     return Future.value(PBDLScreen(
-      designNode: await designNode.interpretNode(),
+      designNode: await designNode!.interpretNode(),
       UUID: id,
       name: name,
     ));

@@ -14,34 +14,34 @@ part 'sketch_node.g.dart';
 class SketchNode {
   @override
   @JsonKey(name: 'do_objectID')
-  final String UUID;
+  final String? UUID;
   final dynamic booleanOperation;
   final dynamic exportOptions;
 
   ///`boundaryRectangle` is not final because its going to change, just because some node contain an offset.
   @override
   @JsonKey(name: 'frame')
-  SketchRect boundaryRectangle;
-  Flow flow;
-  final bool isFixedToViewport;
-  final bool isFlippedHorizontal;
-  final bool isFlippedVertical;
-  final bool isLocked;
-  final bool isVisible;
+  SketchRect? boundaryRectangle;
+  Flow? flow;
+  final bool? isFixedToViewport;
+  final bool? isFlippedHorizontal;
+  final bool? isFlippedVertical;
+  final bool? isLocked;
+  final bool? isVisible;
   final dynamic layerListExpandedType;
-  String name;
-  String type;
-  final bool nameIsFixed;
+  String? name;
+  String? type;
+  final bool? nameIsFixed;
   final dynamic resizingConstraint;
   final dynamic resizingType;
-  final num rotation;
+  final num? rotation;
   final dynamic sharedStyleID;
-  final bool shouldBreakMaskChain;
-  final bool hasClippingMask;
-  final int clippingMaskMode;
+  final bool? shouldBreakMaskChain;
+  final bool? hasClippingMask;
+  final int? clippingMaskMode;
   final dynamic userInfo;
-  final Style style;
-  final bool maintainScrollPosition;
+  final Style? style;
+  final bool? maintainScrollPosition;
 
   SketchNode(
       this.UUID,
@@ -68,10 +68,13 @@ class SketchNode {
       this.style,
       this.maintainScrollPosition);
 
-  Future<PBDLNode> interpretNode() {}
+  Future<PBDLNode> interpretNode() {
+    // TODO: Implement interpretation logic
+    throw UnimplementedError();
+  }
 
   factory SketchNode.fromJson(Map<String, dynamic> json) =>
-      AbstractSketchNodeFactory.getSketchNode(json);
+      AbstractSketchNodeFactory.getSketchNode(json)!;
   @override
   Map<String, dynamic> toJson() => _$SketchNodeToJson(this);
 }

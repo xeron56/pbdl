@@ -15,21 +15,21 @@ part 'style.g.dart';
 @JsonSerializable()
 class Style {
   @JsonKey(name: '_class')
-  final String classField;
+  final String? classField;
   @override
   @JsonKey(name: 'do_objectID')
-  String UUID;
-  final int endMarkerType, miterLimit, startMarkerType, windingRule;
-  final Blur blur;
+  String? UUID;
+  final int? endMarkerType, miterLimit, startMarkerType, windingRule;
+  final Blur? blur;
   @override
-  final BorderOptions borderOptions;
+  final BorderOptions? borderOptions;
   @override
-  final List<Border> borders;
-  final ColorControls colorControls;
-  final ContextSettings contextSettings;
-  List<Fill> fills, innerShadows, shadows;
+  final List<Border>? borders;
+  final ColorControls? colorControls;
+  final ContextSettings? contextSettings;
+  List<Fill>? fills, innerShadows, shadows;
   @JsonKey()
-  TextStyle textStyle;
+  TextStyle? textStyle;
 
   Style({
     this.blur,
@@ -40,13 +40,13 @@ class Style {
     this.contextSettings,
     this.UUID,
     this.endMarkerType,
-    List<Fill> this.fills,
-    List<Fill> this.innerShadows,
+    List<Fill>? this.fills,
+    List<Fill>? this.innerShadows,
     this.miterLimit,
-    List<Fill> this.shadows,
+    List<Fill>? this.shadows,
     this.startMarkerType,
     this.windingRule,
-    TextStyle this.textStyle,
+    TextStyle? this.textStyle,
   }) {
     if (shadows != null) {
       this.shadows = null;
@@ -55,7 +55,7 @@ class Style {
     }
   }
 
-  factory Style.fromJson(Map json) => _$StyleFromJson(json);
+  factory Style.fromJson(Map json) => _$StyleFromJson(json as Map<String, dynamic>);
   Map<String, dynamic> toJson() => _$StyleToJson(this);
 
   PBDLStyle interpretStyle() {
@@ -70,9 +70,9 @@ class Style {
   }
 
   @JsonKey(ignore: true)
-  Color backgroundColor;
+  Color? backgroundColor;
 
   @override
   @JsonKey(ignore: true)
-  bool hasShadow;
+  bool? hasShadow;
 }

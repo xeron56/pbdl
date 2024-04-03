@@ -18,35 +18,35 @@ class FigmaNode extends FigmaBaseNode {
   @JsonKey(
     name: 'id',
   )
-  String UUID;
+  String? UUID;
 
-  String name;
+  String? name;
 
-  String type;
+  String? type;
 
   var pluginData;
 
   var sharedPluginData;
 
-  FigmaRect absoluteBoundingBox;
+  FigmaRect? absoluteBoundingBox;
 
-  final FigmaConstraints constraints;
+  final FigmaConstraints? constraints;
 
-  FigmaNode child;
+  FigmaNode? child;
 
-  String layoutAlign;
+  String? layoutAlign;
 
-  num layoutGrow;
+  num? layoutGrow;
 
   @JsonKey(name: 'visible', defaultValue: true)
-  bool isVisible;
+  bool? isVisible;
 
   @JsonKey(name: 'transitionNodeID')
-  String transitionNodeID;
+  String? transitionNodeID;
   @JsonKey()
-  num transitionDuration;
+  num? transitionDuration;
   @JsonKey()
-  String transitionEasing;
+  String? transitionEasing;
 
   FigmaNode(
     this.name,
@@ -64,10 +64,10 @@ class FigmaNode extends FigmaBaseNode {
   });
 
   @JsonKey(ignore: true)
-  FigmaStyleProperty figmaStyleProperty;
+  FigmaStyleProperty? figmaStyleProperty;
 
   Map figmaStylePropertyToJson(FigmaStyleProperty property) {
-    return figmaStyleProperty.toJson();
+    return figmaStyleProperty!.toJson();
   }
 
   static FigmaStyleProperty figmaStylePropertyFromJson(Map json) {
@@ -79,7 +79,7 @@ class FigmaNode extends FigmaBaseNode {
       listFills.add(FigmaFill.fromJson(fill));
     }
 
-    var figmaStroke = FigmaStroke.fromJson(json);
+    var figmaStroke = FigmaStroke.fromJson(json as Map<String, dynamic>);
 
     for (var effect in json['effects']) {
       listEffects.add(FigmaEffect.fromJson(effect));
@@ -95,7 +95,7 @@ class FigmaNode extends FigmaBaseNode {
   }
 
   @override
-  Future<PBDLNode> interpretNode() async {
+  Future<PBDLNode?> interpretNode() async {
     return Future.value(PBDLNode(
       UUID,
       name,
@@ -103,7 +103,7 @@ class FigmaNode extends FigmaBaseNode {
       null,
       null,
       transitionNodeID,
-      child: await child.interpretNode(),
+      child: await child!.interpretNode(),
       constraints: constraints?.interpret(),
       layoutMainAxisSizing: getGrowSizing(layoutGrow),
       layoutCrossAxisSizing: getAlignSizing(layoutAlign),
@@ -114,7 +114,7 @@ class FigmaNode extends FigmaBaseNode {
   /// grow on the parent's [counter axis].
   ///
   /// https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
-  ParentLayoutSizing getAlignSizing(String layoutAlign) {
+  ParentLayoutSizing getAlignSizing(String? layoutAlign) {
     if (layoutAlign == 'STRETCH') {
       return ParentLayoutSizing.STRETCH;
     } else if (layoutAlign == 'INHERIT') {
@@ -128,7 +128,7 @@ class FigmaNode extends FigmaBaseNode {
   /// grow on the parent's [main axis].
   ///
   /// https://www.figma.com/plugin-docs/api/properties/nodes-layoutgrow/
-  ParentLayoutSizing getGrowSizing(num layoutGrow) {
+  ParentLayoutSizing getGrowSizing(num? layoutGrow) {
     if (layoutGrow == 0.0) {
       return ParentLayoutSizing.INHERIT;
     } else if (layoutGrow == 1.0) {
@@ -139,7 +139,7 @@ class FigmaNode extends FigmaBaseNode {
   }
 
   factory FigmaNode.fromJson(Map<String, dynamic> json) {
-    return AbstractFigmaNodeFactory.getFigmaNode(json)
+    return AbstractFigmaNodeFactory.getFigmaNode(json)!
       ..figmaStyleProperty = figmaStylePropertyFromJson(json);
   }
   @override

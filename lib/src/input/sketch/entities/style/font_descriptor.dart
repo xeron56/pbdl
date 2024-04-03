@@ -8,17 +8,17 @@ class FontDescriptor {
   @JsonKey(name: 'attributes')
   Map<String, dynamic> rawAttributes;
   @JsonKey(ignore: true)
-  String fontName;
+  String? fontName;
   @JsonKey(ignore: true)
-  num fontSize;
+  num? fontSize;
   @JsonKey(ignore: true)
-  String fontWeight;
+  String? fontWeight;
   @JsonKey(ignore: true)
-  String fontStyle;
+  String? fontStyle;
   @JsonKey(ignore: true)
-  num letterSpacing;
+  num? letterSpacing;
 
-  FontDescriptor({this.rawAttributes}) {
+  FontDescriptor({required this.rawAttributes}) {
     fontSize = rawAttributes['size'];
     fontName = rawAttributes['name'];
   }

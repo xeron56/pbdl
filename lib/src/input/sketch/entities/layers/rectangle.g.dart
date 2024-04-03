@@ -6,50 +6,48 @@ part of 'rectangle.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Rectangle _$RectangleFromJson(Map<String, dynamic> json) {
-  return Rectangle(
-    fixedRadius: (json['fixedRadius'] as num)?.toDouble(),
-    hasConvertedToNewRoundCorners:
-        json['hasConvertedToNewRoundCorners'] as bool,
-    needsConvertionToNewRoundCorners:
-        json['needsConvertionToNewRoundCorners'] as bool,
-    edited: json['edited'] as bool,
-    isClosed: json['isClosed'] as bool,
-    pointRadiusBehaviour: json['pointRadiusBehaviour'],
-    points: json['points'] as List,
-    UUID: json['do_objectID'] as String,
-    booleanOperation: json['booleanOperation'],
-    exportOptions: json['exportOptions'],
-    boundaryRectangle: json['frame'] == null
-        ? null
-        : SketchRect.fromJson(json['frame'] as Map<String, dynamic>),
-    flow: json['flow'] == null
-        ? null
-        : Flow.fromJson(json['flow'] as Map<String, dynamic>),
-    isFixedToViewport: json['isFixedToViewport'],
-    isFlippedHorizontal: json['isFlippedHorizontal'],
-    isFlippedVertical: json['isFlippedVertical'],
-    isLocked: json['isLocked'],
-    isVisible: json['isVisible'],
-    layerListExpandedType: json['layerListExpandedType'],
-    name: json['name'],
-    nameIsFixed: json['nameIsFixed'],
-    resizingConstraint: json['resizingConstraint'],
-    resizingType: json['resizingType'],
-    rotation: json['rotation'],
-    sharedStyleID: json['sharedStyleID'],
-    shouldBreakMaskChain: json['shouldBreakMaskChain'],
-    hasClippingMask: json['hasClippingMask'],
-    clippingMaskMode: json['clippingMaskMode'],
-    userInfo: json['userInfo'],
-    style: json['style'] == null
-        ? null
-        : Style.fromJson(json['style'] as Map<String, dynamic>),
-    maintainScrollPosition: json['maintainScrollPosition'],
-  )
-    ..CLASS_NAME = json['CLASS_NAME'] as String
-    ..type = json['_class'] as String;
-}
+Rectangle _$RectangleFromJson(Map<String, dynamic> json) => Rectangle(
+      fixedRadius: (json['fixedRadius'] as num?)?.toDouble(),
+      hasConvertedToNewRoundCorners:
+          json['hasConvertedToNewRoundCorners'] as bool?,
+      needsConvertionToNewRoundCorners:
+          json['needsConvertionToNewRoundCorners'] as bool?,
+      edited: json['edited'] as bool?,
+      isClosed: json['isClosed'] as bool?,
+      pointRadiusBehaviour: json['pointRadiusBehaviour'],
+      points: json['points'] as List<dynamic>?,
+      UUID: json['do_objectID'] as String?,
+      booleanOperation: json['booleanOperation'],
+      exportOptions: json['exportOptions'],
+      boundaryRectangle: json['frame'] == null
+          ? null
+          : SketchRect.fromJson(json['frame'] as Map<String, dynamic>),
+      flow: json['flow'] == null
+          ? null
+          : Flow.fromJson(json['flow'] as Map<String, dynamic>),
+      isFixedToViewport: json['isFixedToViewport'],
+      isFlippedHorizontal: json['isFlippedHorizontal'],
+      isFlippedVertical: json['isFlippedVertical'],
+      isLocked: json['isLocked'],
+      isVisible: json['isVisible'],
+      layerListExpandedType: json['layerListExpandedType'],
+      name: json['name'],
+      nameIsFixed: json['nameIsFixed'],
+      resizingConstraint: json['resizingConstraint'],
+      resizingType: json['resizingType'],
+      rotation: json['rotation'],
+      sharedStyleID: json['sharedStyleID'],
+      shouldBreakMaskChain: json['shouldBreakMaskChain'],
+      hasClippingMask: json['hasClippingMask'],
+      clippingMaskMode: json['clippingMaskMode'],
+      userInfo: json['userInfo'],
+      style: json['style'] == null
+          ? null
+          : Style.fromJson(json['style'] as Map<String, dynamic>),
+      maintainScrollPosition: json['maintainScrollPosition'],
+    )
+      ..CLASS_NAME = json['CLASS_NAME'] as String?
+      ..type = json['_class'] as String?;
 
 Map<String, dynamic> _$RectangleToJson(Rectangle instance) => <String, dynamic>{
       'booleanOperation': instance.booleanOperation,

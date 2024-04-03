@@ -6,12 +6,12 @@ part 'gradient.g.dart';
 @JsonSerializable()
 class Gradient {
   @JsonKey(name: '_class')
-  final String classField;
-  final double elipseLength;
-  final String from;
-  final double gradientType;
-  final String to;
-  final List<GradientStop> stops;
+  final String? classField;
+  final double? elipseLength;
+  final String? from;
+  final double? gradientType;
+  final String? to;
+  final List<GradientStop>? stops;
 
   Gradient(
       {this.classField,
@@ -21,6 +21,6 @@ class Gradient {
       this.stops,
       this.to});
 
-  factory Gradient.fromJson(Map json) => _$GradientFromJson(json);
+  factory Gradient.fromJson(Map json) => _$GradientFromJson(json as Map<String, dynamic>);
   Map toJson() => _$GradientToJson(this);
 }

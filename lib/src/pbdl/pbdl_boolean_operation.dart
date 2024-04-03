@@ -13,45 +13,45 @@ class PBDLBooleanOperation extends PBDLVector
     implements PBDLNodeFactory, PBDLNode {
   List<PBDLNode> children = [];
 
-  String booleanOperation;
+  String? booleanOperation;
 
   @override
-  String pbdlType = 'boolean_operation';
+  String? pbdlType = 'boolean_operation';
 
   @override
-  var boundaryRectangle;
+  PBDLBoundaryBox? boundaryRectangle;
 
   // TODO: do we need this for this class? Ivans
   @override
-  String imageReference;
+  String? imageReference;
 
   @override
-  String UUID;
+  String? UUID;
 
   @override
-  String name;
+  String? name;
 
   @override
-  String prototypeNodeUUID;
+  String? prototypeNodeUUID;
 
   @override
-  PBDLStyle style;
+  PBDLStyle? style;
 
   @override
-  bool isVisible;
+  bool? isVisible;
 
   PBDLBooleanOperation({
     children,
     booleanOperation,
     type,
-    PBDLStyle style,
-    PBDLBoundaryBox boundaryRectangle,
-    String UUID,
+    PBDLStyle? style,
+    PBDLBoundaryBox? boundaryRectangle,
+    String? UUID,
     prototypeNodeUUID,
     transitionDuration,
     transitionEasing,
     imageReference,
-    PBDLConstraints constraints,
+    PBDLConstraints? constraints,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
   }) : super(

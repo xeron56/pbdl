@@ -6,14 +6,14 @@ part 'border_options.g.dart';
 @JsonSerializable()
 class BorderOptions {
   @JsonKey(name: '_class')
-  String classField;
+  String? classField;
   @override
-  bool isEnabled;
+  bool? isEnabled;
   @override
-  List dashPattern;
+  List? dashPattern;
   @override
-  int lineCapStyle;
-  String lineJoinStyle;
+  int? lineCapStyle;
+  String? lineJoinStyle;
 
   BorderOptions(
     this.classField,
@@ -23,7 +23,7 @@ class BorderOptions {
     this.lineJoinStyle,
   );
 
-  factory BorderOptions.fromJson(Map json) => _$BorderOptionsFromJson(json);
+  factory BorderOptions.fromJson(Map json) => _$BorderOptionsFromJson(json as Map<String, dynamic>);
   Map toJson() => _$BorderOptionsToJson(this);
 
   PBDLBorderOptions interpretOptions() {

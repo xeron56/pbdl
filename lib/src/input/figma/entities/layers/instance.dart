@@ -16,9 +16,9 @@ part 'instance.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   @override
-  String type = 'INSTANCE';
+  String? type = 'INSTANCE';
 
-  List parameters;
+  List? parameters;
 
   Instance({
     name,
@@ -32,7 +32,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
     strokeWeight,
     strokeAlign,
     cornerRadius,
-    FigmaConstraints constraints,
+    FigmaConstraints? constraints,
     layoutAlign,
     layoutGrow,
     size,
@@ -40,12 +40,12 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
     verticalPadding,
     itemSpacing,
     this.componentId,
-    List<FigmaNode> children,
+    List<FigmaNode>? children,
     this.parameters,
-    FigmaColor backgroundColor,
-    String transitionNodeID,
-    num transitionDuration,
-    String transitionEasing,
+    FigmaColor? backgroundColor,
+    String? transitionNodeID,
+    num? transitionDuration,
+    String? transitionEasing,
   }) : super(
             name: name,
             isVisible: isVisible,
@@ -68,7 +68,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
             transitionDuration: transitionDuration,
             transitionEasing: transitionEasing);
 
-  String componentId;
+  String? componentId;
 
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) =>
@@ -82,7 +82,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   Future<PBDLNode> interpretNode() async {
     var cacheService = ComponentCacheService();
     var overrideValues = <PBDLOverrideValue>[];
-    for (var child in children) {
+    for (var child in children!) {
       var currVals = await _traverseChildrenForOverrides(child)
         ..removeWhere((element) => element.value == null);
       overrideValues.addAll(currVals);
@@ -96,8 +96,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
         overrideValues: overrideValues,
         name: name,
         isVisible: isVisible,
-        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-        style: figmaStyleProperty.interpretStyle(),
+        boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
+        style: figmaStyleProperty!.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
         symbolID: componentId,
@@ -114,16 +114,16 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
           overrideProperties: null,
           name: name,
           isVisible: isVisible,
-          boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+          boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
           style: figmaStyleProperty?.interpretStyle(),
           prototypeNodeUUID: transitionNodeID,
           symbolID: componentId,
-          constraints: constraints.interpret(),
+          constraints: constraints!.interpret(),
           isFlowHome: isFlowHome,
           layoutMainAxisSizing: getGrowSizing(layoutGrow),
           layoutCrossAxisSizing: getAlignSizing(layoutAlign),
           children: await Future.wait(
-            children.map((e) async => await e.interpretNode()).toList(),
+            children!.map((e) async => await e.interpretNode()).toList(),
           ),
           sharedNodeSetID: cacheService.getComponentSetId(componentId),
           // componentSetName: componentsetName
@@ -150,7 +150,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       if (override != null) {
         // Create override value and add it to list
         values.add(PBDLOverrideValue(
-          current.UUID.split(';').last, // Get UUID of node to replace
+          current!.UUID!.split(';').last, // Get UUID of node to replace
           current.name,
           override.getPBDLType(),
           await override.getProperty(current),
@@ -158,10 +158,10 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
         )..constraints = current.constraints?.interpret());
       }
 
-      if (current.child != null) {
-        stack.add(current.child);
+      if (current!.child != null) {
+        stack.add(current.child!);
       } else if (current is FigmaChildrenNode && current.children != null) {
-        current.children.forEach(stack.add);
+        current.children!.forEach(stack.add);
       }
     }
     return Future.value(values);
@@ -184,7 +184,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
 
   // TODO: implement overrideValues
   // List<FigmaOverridableValue> get overrideValues => overrideValues;
-  List<FigmaOverridableValue> overrideValues;
+  List<FigmaOverridableValue>? overrideValues;
 
   // TODO: implement typeToAbbreviation
   Map<Type, String> get typeToAbbreviation => throw UnimplementedError();

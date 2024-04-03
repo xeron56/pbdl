@@ -27,17 +27,17 @@ class PBDL {
     String sketchPath, {
 
     /// Absolute path to where JSON will be exported
-    @required String outputPath,
+    required String outputPath,
 
     /// Absolute path to where pngs will be exported.
     /// If [null], will have the same path as `outputPath`
-    String pngPath,
+    String? pngPath,
 
     /// [bool] that indicates whether the pbdl file will be written to the `outputPath`
     bool exportPbdlJson = false,
   }) async {
-    return await runZonedGuarded(() async {
-      if (pngPath == null || pngPath.isEmpty) {
+    return (await runZonedGuarded(() async {
+      if (pngPath == null || pngPath!.isEmpty) {
         pngPath = outputPath;
       }
 
@@ -69,29 +69,29 @@ class PBDL {
       return pbdl;
     }, (error, stackTrace) async {
       print(error.toString());
-    });
+    }))!;
   }
 
   /// Method that creates and returns a [PBDLProject] from figma `projectID` and `key`
   static Future<PBDLProject> fromFigma(
     String projectID, {
-    String key,
-    String oauthKey,
+    String? key,
+    String? oauthKey,
 
     /// Absolute path to where JSON will be exported
-    @required String outputPath,
+    required String outputPath,
 
     /// Absolute path to where pngs will be exported.
     /// If [null], will have the same path as `outputPath`
-    String pngPath,
+    String? pngPath,
 
     /// [bool] that indicates whether the pbdl file will be written to the `outputPath`
     bool exportPbdlJson = false,
-    String projectName,
+    String? projectName,
     String integrationStrategy = 'screen',
     String designSystemType = 'material2',
   }) async {
-    return await runZonedGuarded(() async {
+    return (await runZonedGuarded(() async {
       final getIt = GetIt.instance;
 
       final designSystem =
@@ -99,7 +99,7 @@ class PBDL {
 
       getIt.registerSingleton(GlobalStyleHolder(designSystem));
 
-      if (pngPath == null || pngPath.isEmpty) {
+      if (pngPath == null || pngPath!.isEmpty) {
         pngPath = outputPath;
       }
 
@@ -132,12 +132,12 @@ class PBDL {
       return pbdl;
     }, (error, stackTrace) async {
       print(error.toString());
-    });
+    }))!;
   }
 
   static void _setupMainInfo(
     String outputPath,
-    String pngPath, {
+    String? pngPath, {
     String projectName = 'foo',
   }) {
     MainInfo().projectName = projectName;
@@ -148,7 +148,7 @@ class PBDL {
 
   /// Normalizes `absPath` if non-null and non-empty.
   /// Otherwise, returns current path
-  static String _normalizedPath(String absPath) {
+  static String _normalizedPath(String? absPath) {
     if (absPath != null && absPath.isNotEmpty) {
       return p.normalize(p.absolute(p.join(absPath)));
     }
@@ -187,25 +187,25 @@ class PBDL {
 
   /// Iterates through the [project] and returns a list of the UUIDs of the
   /// rootNodes
-  static Map<String, Map> processRootNodeUUIDs(
+  static Map<String?, Map> processRootNodeUUIDs(
       PBDLProject project, AssetProcessingService apService) {
-    var result = <String, Map>{};
+    var result = <String?, Map>{};
 
-    for (var page in project.pages) {
-      for (PBDLScreen screen in page.screens) {
+    for (var page in project.pages!) {
+      for (PBDLScreen screen in page.screens as Iterable<PBDLScreen>) {
         screen.imageURI = AzureAssetService().getImageURI('${screen.UUID}.png');
         result[screen.UUID] = {
-          'width': screen.designNode.boundaryRectangle.width,
-          'height': screen.designNode.boundaryRectangle.height
+          'width': screen.designNode!.boundaryRectangle!.width,
+          'height': screen.designNode!.boundaryRectangle!.height
         };
       }
     }
 
-    for (var page in project.miscPages) {
-      for (PBDLScreen screen in page.screens) {
+    for (var page in project.miscPages!) {
+      for (PBDLScreen screen in page.screens as Iterable<PBDLScreen>) {
         result[screen.UUID] = {
-          'width': screen.designNode.boundaryRectangle.width,
-          'height': screen.designNode.boundaryRectangle.height
+          'width': screen.designNode!.boundaryRectangle!.width,
+          'height': screen.designNode!.boundaryRectangle!.height
         };
       }
     }
@@ -217,7 +217,7 @@ class PBDL {
   /// onto the `outputPath` with which PBDL was initialized.
   static void _writePbdlJson(
     PBDLProject project, {
-    String fileName,
+    String? fileName,
   }) {
     project.sortByUUID();
     fileName ??= project.name;
